@@ -15,6 +15,8 @@ public class TopDownControls : MonoBehaviour{
 		
 		walkSpeed = (float)(Speed + (Agility/5));
 		sprintSpeed = walkSpeed + (walkSpeed / 2);
+
+		walkSpeed *= 0.6f;
 		
 	}
 	

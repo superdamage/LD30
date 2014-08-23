@@ -24,11 +24,14 @@ public class Mars : MonoBehaviour {
 
 	private Vector2 topLeft = new Vector2();
 
-	public GUIText genTxt;
+	public Rect worldBunds;
+
+	public RockGenerator rockGenerator;
+
 
 	void Start () {
 
-		genTxt.enabled = true;
+		worldBunds = new Rect();
 
 		U = numTilesX; 
 		V = numTilesY;
@@ -47,14 +50,19 @@ public class Mars : MonoBehaviour {
 
 		x = topLeft.x;
 		y = topLeft.y;
-		
+
+		worldBunds.x = x;
+		worldBunds.y = y;
+		worldBunds.width = finalSize.x + spriteSize;
+		worldBunds.height = finalSize.y + spriteSize;
+
 		//ThreadStart job = new ThreadStart (GenerateJob);
 		//Thread thread = new Thread (job);
 		//thread.Start ();
 
 		GenerateJob ();
 
-		genTxt.enabled = false;
+		rockGenerator.Generate(worldBunds);
 	}
 
 	void GenerateJob(){
@@ -65,7 +73,7 @@ public class Mars : MonoBehaviour {
 				
 				Vector2 pos = new Vector3 (x, y, 0);
 				Transform tile = Instantiate (tileTemplate, pos, Quaternion.identity) as Transform;
-				Debug.Log(100-(gen/genTotal*100));
+				//Debug.Log(100-(gen/genTotal*100));
 				gen--;
 				
 				

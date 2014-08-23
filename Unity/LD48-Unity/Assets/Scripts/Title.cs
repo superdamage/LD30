@@ -22,7 +22,8 @@ public class Title : MonoBehaviour {
 	}
 
 	void onPlay(){
-		Debug.Log (@"SEPS");
+
+		Application.LoadLevel (@"Game");
 	}
 	
 	// Update is called once per frame
