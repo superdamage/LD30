@@ -3,13 +3,16 @@ using System.Collections;
 
 public class Intro : MonoBehaviour {
 
-	// Use this for initialization
+	float introDuration = 4.0f;
+
 	void Start () {
-	
+		
 	}
 	
-	// Update is called once per frame
 	void Update () {
-	
+		introDuration -= Time.deltaTime;
+		if (introDuration <= 0) {
+			Application.LoadLevel(@"Title");
+		}
 	}
 }
