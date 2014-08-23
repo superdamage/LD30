@@ -3,7 +3,7 @@ using System.Collections;
 
 public class Intro : MonoBehaviour {
 
-	float introDuration = 4.0f;
+	float introDuration = 2.5f;
 
 	void Start () {
 		
