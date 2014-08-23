@@ -46,9 +46,19 @@
 	</Reference>
   </ItemGroup>
   <ItemGroup>
+     <Compile Include="Assets\Scripts\CameraFollowBounds.cs" />
      <Compile Include="Assets\Scripts\GUITextButton.cs" />
      <Compile Include="Assets\Scripts\Intro.cs" />
+     <Compile Include="Assets\Scripts\Mars.cs" />
      <Compile Include="Assets\Scripts\Title.cs" />
+     <Compile Include="Assets\Scripts\TopDownControls.cs" />
+ <Reference Include="Assembly-UnityScript-firstpass">
+ <HintPath>/Users/eralpkaraduman/Documents/LD48/LD30/Unity/LD48-Unity/Library/ScriptAssemblies/Assembly-UnityScript-firstpass.dll</HintPath>
+ </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="Assembly-CSharp-firstpass-vs.csproj">
+      <Project>{58F8FDC3-39BA-20B1-BFD8-B115DB3A4B43}</Project>      <Name>Assembly-CSharp-firstpass-vs</Name>    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

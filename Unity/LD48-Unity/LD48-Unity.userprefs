@@ -1,9 +1,14 @@
 ﻿<Properties>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="MonoDevelop.Default" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/GUITextButton.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/Mars.cs">
     <Files>
-      <File FileName="Assets/Scripts/Intro.cs" Line="19" Column="1" />
-      <File FileName="Assets/Scripts/GUITextButton.cs" Line="8" Column="27" />
+      <File FileName="Assets/Scripts/Intro.cs" Line="10" Column="14" />
+      <File FileName="Assets/Scripts/GUITextButton.cs" Line="1" Column="1" />
+      <File FileName="Assets/Scripts/Title.cs" Line="1" Column="1" />
+      <File FileName="Assets/Standard Assets/Character Controllers/Sources/Scripts/ThirdPersonController.js" Line="1" Column="1" />
+      <File FileName="Assets/Standard Assets/Character Controllers/Sources/Scripts/ThirdPersonCamera.js" Line="1" Column="1" />
+      <File FileName="Assets/Scripts/TopDownControls.cs" Line="25" Column="3" />
+      <File FileName="Assets/Scripts/Mars.cs" Line="31" Column="25" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
