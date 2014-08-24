@@ -5,8 +5,10 @@ public class Rock : MonoBehaviour {
 
 	public Sprite darkSprite;
 	public Sprite lightSprite;
-
+	public Transform rockShadowPrefab;
 	private AudioSource dragSFXSource;
+
+	private Transform shadow;
 
 	private float sfxMinVelocity = 0.2f;
 
@@ -26,6 +28,8 @@ public class Rock : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		dragSFXSource = this.GetComponent("AudioSource") as AudioSource;
+		shadow = Instantiate (rockShadowPrefab, this.transform.position, Quaternion.identity) as Transform;
+		shadow.parent = this.transform.parent;
 	}
 
 
@@ -40,5 +44,10 @@ public class Rock : MonoBehaviour {
 		}else{
 			dragSFXSource.enabled = false;
 		}
+
+		Vector3 shadowPosition = this.transform.position;
+		shadowPosition.y -= 0.3f;
+		shadowPosition.z -= -2.0f;
+		shadow.position = shadowPosition;
 	}
 }

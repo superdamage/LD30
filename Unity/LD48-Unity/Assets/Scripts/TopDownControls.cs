@@ -14,6 +14,8 @@ public class TopDownControls : MonoBehaviour{
 
 	public Animator animator;
 
+	public Mars mars;
+
 	private RockDragger dragger;
 	
 	void Start()
@@ -69,7 +71,12 @@ public class TopDownControls : MonoBehaviour{
 		}
 
 
-
+		float halfW = mars.worldBunds.width / 2 - 0.5f;
+		float halfH = mars.worldBunds.height / 2 - 0.8f;
+		Vector3 pos = transform.position;
+		pos.x = Mathf.Clamp (pos.x,-halfW,halfW);
+		pos.y = Mathf.Clamp (pos.y,-halfH,halfH);
+		this.transform.position = pos;
 
 	}
 }
