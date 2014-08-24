@@ -68,7 +68,7 @@ public class CamerFocusSwitcher : MonoBehaviour {
 		float vertExtent = Camera.main.camera.orthographicSize;  
 		float horzExtent = vertExtent * Screen.width / Screen.height;
 		float p = levelLoader.sentenceSize.x/horzExtent;
-		p = Mathf.Max (p,0.90f);
+		p = Mathf.Max (p,0.9f);
 
 		return defaultCameraSize*p;
 	}

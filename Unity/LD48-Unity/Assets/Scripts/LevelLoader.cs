@@ -22,6 +22,8 @@ public class LevelLoader : MonoBehaviour {
 
 	public Vector2 gap = new Vector2(3,3);
 
+	public RockDragger rockDragger;
+
 	public Vector2 sentenceSize = new Vector2();
 
 	void Start () {
@@ -113,6 +115,7 @@ public class LevelLoader : MonoBehaviour {
 		Transform placeholder = Instantiate (placeholderPrefab, linePos, Quaternion.identity) as Transform;
 		placeholder.parent = this.gameObject.transform;
 		RockPlaceholder ph = placeholder.GetComponent("RockPlaceholder") as RockPlaceholder;
+		ph.rockDragger = rockDragger;
 		ph.setDash(code==morse.dash);
 
 	}

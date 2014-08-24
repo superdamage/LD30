@@ -30,9 +30,20 @@ public class Rock : MonoBehaviour {
 		dragSFXSource = this.GetComponent("AudioSource") as AudioSource;
 		shadow = Instantiate (rockShadowPrefab, this.transform.position, Quaternion.identity) as Transform;
 		shadow.parent = this.transform.parent;
+		//isDragTarget (false);
 	}
 
+	/*
+	public void isDragTarget(bool value){
+		targetIndicatorSpriteRenderer.enabled = value;
+	}
+	*/
 
+	/*
+	public void setFixed(bool isFixed){
+		transform.rigidbody2D.isKinematic = isFixed;
+	}
+	*/
 	
 	// Update is called once per frame
 	void Update () {
