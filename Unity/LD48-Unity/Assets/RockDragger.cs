@@ -6,6 +6,8 @@ public class RockDragger : MonoBehaviour {
 	public Collider2D pullCandidate;
 	public DistanceJoint2D activeJoint = null;
 
+	public AudioSource strainSFX;
+
 	// Use this for initialization
 	void Start () {
 		
@@ -22,6 +24,8 @@ public class RockDragger : MonoBehaviour {
 				dst.connectedBody = this.rigidbody2D;
 				activeJoint = dst;
 				dst.enabled = true;
+
+				strainSFX.Play();
 			}
 
 		}
