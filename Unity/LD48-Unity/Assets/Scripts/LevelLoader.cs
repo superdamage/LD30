@@ -99,7 +99,7 @@ public class LevelLoader : MonoBehaviour {
 
 		sentenceSize.x = Mathf.Max (sentenceSize.x,lineWidth);
 
-		linePosStart.x = -lineWidth / 2;
+		linePosStart.x = (-lineWidth / 2) + gap.x/2;
 		linePosStart.y -= gap.y;
 	}
 

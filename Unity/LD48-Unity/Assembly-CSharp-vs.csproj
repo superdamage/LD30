@@ -49,7 +49,7 @@
      <Compile Include="Assets\JSON\JSONObject.cs" />
      <Compile Include="Assets\JSON\JSONTemplates.cs" />
      <Compile Include="Assets\JSON\VectorTemplates.cs" />
-     <Compile Include="Assets\RockDragger.cs" />
+     <Compile Include="Assets\Scripts\CamerFocusSwitcher.cs" />
      <Compile Include="Assets\Scripts\CameraFollowBounds.cs" />
      <Compile Include="Assets\Scripts\GUITextButton.cs" />
      <Compile Include="Assets\Scripts\Intro.cs" />
@@ -57,6 +57,7 @@
      <Compile Include="Assets\Scripts\Mars.cs" />
      <Compile Include="Assets\Scripts\Morse.cs" />
      <Compile Include="Assets\Scripts\Rock.cs" />
+     <Compile Include="Assets\Scripts\RockDragger.cs" />
      <Compile Include="Assets\Scripts\RockGenerator.cs" />
      <Compile Include="Assets\Scripts\RockPlaceholder.cs" />
      <Compile Include="Assets\Scripts\Title.cs" />
