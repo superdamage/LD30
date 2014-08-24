@@ -37,10 +37,21 @@ public class Rock : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 
-		if (Mathf.Abs (rigidbody2D.velocity.x) >= sfxMinVelocity ||
-		    Mathf.Abs (rigidbody2D.velocity.y) >= sfxMinVelocity) {
+		float hVelocity = rigidbody2D.velocity.x;
+		float vVelocity = rigidbody2D.velocity.y;
+
+		if (Mathf.Abs (hVelocity) >= sfxMinVelocity ||
+		    Mathf.Abs (vVelocity) >= sfxMinVelocity) {
 		
 			dragSFXSource.enabled = true;
+			float t = hVelocity;
+			if(Mathf.Abs(vVelocity)>Mathf.Abs(hVelocity)){
+				t = -vVelocity;
+			}
+
+			//t = Mathf.Max(hVelocity,vVelocity);
+			rigidbody2D.AddTorque(-t*10);
+
 		}else{
 			dragSFXSource.enabled = false;
 		}
