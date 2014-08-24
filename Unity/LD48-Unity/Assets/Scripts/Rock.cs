@@ -47,7 +47,7 @@ public class Rock : MonoBehaviour {
 
 		Vector3 shadowPosition = this.transform.position;
 		shadowPosition.y -= 0.3f;
-		shadowPosition.z -= -2.0f;
+		shadowPosition.z = -0.6f;
 		shadow.position = shadowPosition;
 	}
 }
