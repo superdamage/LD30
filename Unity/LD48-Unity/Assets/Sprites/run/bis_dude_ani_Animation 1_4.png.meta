@@ -1,8 +1,8 @@
 fileFormatVersion: 2
-guid: 17c07ca3a7dcc49b19bd6781f135ff69
+guid: 2384e4a931c1e4957aec1624ca1adbff
 TextureImporter:
   fileIDToRecycleName:
-    21300000: bis_shadow_v1
+    21300000: bis_dude_ani_Animation 1_4
   serializedVersion: 2
   mipmaps:
     mipMapMode: 0
@@ -23,12 +23,12 @@ TextureImporter:
   generateCubemap: 0
   seamlessCubemap: 0
   textureFormat: -3
-  maxTextureSize: 32
+  maxTextureSize: 64
   textureSettings:
     filterMode: 0
-    aniso: -1
+    aniso: 1
     mipBias: -1
-    wrapMode: -1
+    wrapMode: 1
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50

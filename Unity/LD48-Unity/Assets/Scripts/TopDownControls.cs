@@ -12,6 +12,8 @@ public class TopDownControls : MonoBehaviour{
 
 	public AudioSource footStepsSFX;
 
+	public Animator animator;
+
 	private RockDragger dragger;
 	
 	void Start()
@@ -36,19 +38,38 @@ public class TopDownControls : MonoBehaviour{
 		rigidbody2D.velocity = new Vector2(Mathf.Lerp(0, Input.GetAxis("Horizontal")* curSpeed, 0.8f),
 		                                   Mathf.Lerp(0, Input.GetAxis("Vertical")* curSpeed, 0.8f));
 
+		bool dragging = false;
 		dragger = this.GetComponent("RockDragger") as RockDragger;
 		if (dragger.activeJoint != null) {
 			footStepsSFX.pitch = 0.9f;
+			dragging = true;
 		} else {
 			footStepsSFX.pitch = 1.9f;
 		}
 
-		if (Mathf.Abs (rigidbody2D.velocity.x) >= sfxMinVelocity ||
-		    Mathf.Abs (rigidbody2D.velocity.y) >= sfxMinVelocity) {
+		float velocityX = rigidbody2D.velocity.x;
+		float velocityY = rigidbody2D.velocity.y;
+
+		if (Mathf.Abs (velocityX) >= sfxMinVelocity ||
+		    Mathf.Abs (velocityY) >= sfxMinVelocity) {
 			
 			footStepsSFX.enabled = true;
+
+			Quaternion r = transform.rotation;
+			r.y = (velocityX<=0)?180:0;
+			transform.rotation = r;
+
+			animator.Play(dragging?"drag":"run");
+
+
 		}else{
 			footStepsSFX.enabled = false;
+
+			animator.Play("idle");
 		}
+
+
+
+
 	}
 }

@@ -1,8 +1,8 @@
 fileFormatVersion: 2
-guid: 17c07ca3a7dcc49b19bd6781f135ff69
+guid: ce6d481c5a39a4eeebe28cb6be616219
 TextureImporter:
   fileIDToRecycleName:
-    21300000: bis_shadow_v1
+    21300000: bis_dude_idle_paranoid_Animation 1_09
   serializedVersion: 2
   mipmaps:
     mipMapMode: 0
@@ -23,7 +23,7 @@ TextureImporter:
   generateCubemap: 0
   seamlessCubemap: 0
   textureFormat: -3
-  maxTextureSize: 32
+  maxTextureSize: 64
   textureSettings:
     filterMode: 0
     aniso: -1
