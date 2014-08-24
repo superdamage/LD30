@@ -1,5 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
+using System.Collections.Specialized;
 
 
 public class LevelLoader : MonoBehaviour {
@@ -12,26 +14,42 @@ public class LevelLoader : MonoBehaviour {
 
 	void Start () {
 		morse = new Morse (morseTextAsset.text);
-		string[] test_decoded = morse.encode(@"hello world");
-		Debug.Log ("DCD "+test_decoded[0]+" "+test_decoded[1]);
+		nextLevel ();
 		
 	}
 
 	void nextLevel(){
 		currentLevel++;
 		destroyCurrentLevel ();
-		loadLevel (currentLevel);
+		renderLevel (currentLevel);
 	}
 
 	void destroyCurrentLevel(){
 		
 	}
 
-	void loadLevel(int levelIndex){
+	void renderLevel(int levelIndex){
 		string jsonString = levelAssets [levelIndex].text;
 		JSONObject levelData = new JSONObject (jsonString);
 		string q = levelData["question"].str;
-		string a = levelData["decoded"].str;
+		string decoded_answer = levelData["decoded"].str;
+
+		string debugEncoedWords = "";
+
+		int[][] encoded_answer = morse.encode (decoded_answer);
+		for (int w=0; w<encoded_answer.Length; w++) {
+
+			string debugEncoedWord = "";
+			for (int l=0; l<encoded_answer[w].Length; l++) {
+				debugEncoedWord += encoded_answer[w][l];
+			}
+			debugEncoedWords+=debugEncoedWord;
+			if(w!=encoded_answer.Length-1){
+				debugEncoedWords+=("/");
+			}
+
+		}
+		Debug.Log ("enc " + debugEncoedWords);
 	}
 
 	void Update () {
