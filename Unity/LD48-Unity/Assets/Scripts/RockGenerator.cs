@@ -6,6 +6,8 @@ public class RockGenerator : MonoBehaviour {
 	public Transform rockPrefab;
 	public int numRocks = 40;
 
+	private Rect worldBounds;
+
 	
 	// Use this for initialization
 	void Start () {
@@ -14,16 +16,12 @@ public class RockGenerator : MonoBehaviour {
 
 	}
 
-	public void Generate(Rect worldBounds){
+	public void Generate(Rect _worldBounds){
+		worldBounds = _worldBounds;
 
 		while (numRocks>0) {
 
-			float halfW = worldBounds.width / 2;
-			float halfH = worldBounds.height / 2;
-			float rX = Random.Range (-halfW, halfW);
-			float rY = Random.Range (-halfH, halfH);
-
-			Vector3 pos = new Vector3 (rX, rY, transform.position.z);
+			Vector3 pos = randomPositon();
 			Transform rock = Instantiate (rockPrefab, pos, Quaternion.identity) as Transform;
 			Rock rockGO = rock.gameObject.GetComponent<Rock>();
 			rockGO.Dark = Random.Range(0,2)==0;
@@ -32,6 +30,25 @@ public class RockGenerator : MonoBehaviour {
 			numRocks--;
 
 		}
+	}
+
+
+	public Vector3 randomPositon(){
+		float halfW = worldBounds.width / 2 * 0.8f;
+		float halfH = worldBounds.height / 2 * 0.6f;
+		float rX = Random.Range (-halfW, halfW);
+		float rY = Random.Range (-halfH, halfH);
+		
+		Vector3 pos = new Vector3 (rX, rY, transform.position.z);
+		return pos;
+	}
+
+	public void replace(Rock rock){
+
+		Destroy (rock.gameObject);
+		numRocks++;
+		Generate (worldBounds);
+
 	}
 	
 	// Update is called once per frame
