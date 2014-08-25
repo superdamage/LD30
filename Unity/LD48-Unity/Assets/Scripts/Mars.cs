@@ -28,8 +28,16 @@ public class Mars : MonoBehaviour {
 
 	public RockGenerator rockGenerator;
 
+	private float SOL_IN_HOURS = 24*2.7f;
+	private float SOL_IN_SECONDS;
+	public float timeScale = 1;
+	public float secondsSpent = 0;
+	public float secondsUntilNextSol = 0;
+	public float hoursUntilNextSol = 0;
 
 	void Start () {
+
+		SOL_IN_SECONDS = SOL_IN_HOURS * 60 * 60;
 
 		worldBunds = new Rect();
 
@@ -98,11 +106,15 @@ public class Mars : MonoBehaviour {
 
 		}
 
-
-
 	}
 	
 	void Update () {
-		
+
+		secondsSpent = Time.time * timeScale;
+		secondsUntilNextSol = SOL_IN_SECONDS - (secondsSpent % SOL_IN_SECONDS);
+		hoursUntilNextSol = secondsUntilNextSol / (60*60);
+
+		Debug.Log ("ss "+secondsSpent+" huns "+hoursUntilNextSol);
+
 	}
 }

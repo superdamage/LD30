@@ -9,7 +9,9 @@ public class LevelLoader : MonoBehaviour {
 	public int currentLevel = -1;
 	private Morse morse;
 
-	public TextAsset[] levelAssets;
+	public TextAsset levelsAsset;
+
+	//public TextAsset[] levelAssets;
 	public TextAsset morseTextAsset;
 
 	private List<RockPlaceholder> placeholders = new List<RockPlaceholder>();
@@ -26,6 +28,9 @@ public class LevelLoader : MonoBehaviour {
 
 	public Vector2 sentenceSize = new Vector2();
 
+
+	public string currentQuestion = "";
+
 	void Start () {
 		morse = new Morse (morseTextAsset.text);
 		nextLevel ();
@@ -41,16 +46,30 @@ public class LevelLoader : MonoBehaviour {
 	void destroyCurrentLevel(){
 		U = 0;
 		V = 0;
+
+		if (placeholders != null) {
+			for(int i=0; i<placeholders.Count; i++){
+				Destroy(placeholders[i].gameObject);
+			}
+		}
+
+		placeholders = new List<RockPlaceholder> ();
 	}
 
 	void renderLevel(int levelIndex){
-		string jsonString = levelAssets [levelIndex].text;
-		JSONObject levelData = new JSONObject (jsonString);
+
+		string jsonString = levelsAsset.text;
+		List<JSONObject> levelDatas = new JSONObject (jsonString).list;
+		JSONObject levelData = levelDatas [levelIndex];
 		string q = levelData["question"].str;
+		string a = levelData["decoded"].str;
 		string decoded_answer = levelData["decoded"].str;
 
 		Debug.Log ("rendering level: "+levelIndex);
 		Debug.Log ("question: "+q);
+		Debug.Log ("decoded answer: "+a);
+
+		currentQuestion = q;
 
 		string debugEncoedWords = "";
 
@@ -116,7 +135,7 @@ public class LevelLoader : MonoBehaviour {
 		placeholder.parent = this.gameObject.transform;
 		RockPlaceholder ph = placeholder.GetComponent("RockPlaceholder") as RockPlaceholder;
 		ph.rockDragger = rockDragger;
-		ph.setDash(code==morse.dash);
+		ph.setDash(code==morse.dash);	
 
 	}
 
