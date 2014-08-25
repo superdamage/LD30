@@ -4,6 +4,7 @@ using System.Collections;
 public class Rover : MonoBehaviour {
 
 	public SpriteRenderer roof;
+
 	// Use this for initialization
 	void Start () {
 	
@@ -16,16 +17,18 @@ public class Rover : MonoBehaviour {
 
 	void OnTriggerEnter2D(Collider2D o){
 
-		if (o.tag == "Player") {
-
+		if (o.tag == "Player" && o.isTrigger==false) {
+			Debug.Log("pl");
+			//focusSwitcher.playerIsInRover = true;
 			roof.enabled = true;
 		}
 	}
 
 	void OnTriggerExit2D(Collider2D o){
 
-		if (o.tag == "Player") {
-
+		if (o.tag == "Player" && o.isTrigger==false) {
+			Debug.Log("pl-e");
+			//focusSwitcher.playerIsInRover = false;
 			roof.enabled = false;
 		}
 	}

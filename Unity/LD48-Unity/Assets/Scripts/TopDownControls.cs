@@ -8,7 +8,7 @@ public class TopDownControls : MonoBehaviour{
 	private float curSpeed;
 	private float maxSpeed;
 
-	private float sfxMinVelocity = 0.2f;
+	private float sfxMinVelocity = 0.5f;
 
 	public AudioSource footStepsSFX;
 

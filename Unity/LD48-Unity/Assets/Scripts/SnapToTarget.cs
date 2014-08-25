@@ -31,7 +31,7 @@ public class SnapToTarget : MonoBehaviour {
 			renderer.enabled = true;
 
 			((SpriteRenderer)renderer).sprite = isDash?dashTarget:dotTarget;
-			//enabled = true;
+
 		}else{
 
 			renderer.enabled = false;
