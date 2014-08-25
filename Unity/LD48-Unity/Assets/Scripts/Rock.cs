@@ -72,4 +72,13 @@ public class Rock : MonoBehaviour {
 		shadowPosition.z = -0.6f;
 		shadow.position = shadowPosition;
 	}
+
+	void OnTriggerEnter2D(Collider2D o){
+		
+		if (o.tag == "Rover") {
+			renderer.enabled = false;
+		}
+	}
+
+
 }

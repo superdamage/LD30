@@ -60,6 +60,7 @@
      <Compile Include="Assets\Scripts\RockDragger.cs" />
      <Compile Include="Assets\Scripts\RockGenerator.cs" />
      <Compile Include="Assets\Scripts\RockPlaceholder.cs" />
+     <Compile Include="Assets\Scripts\Rover.cs" />
      <Compile Include="Assets\Scripts\SnapToTarget.cs" />
      <Compile Include="Assets\Scripts\Title.cs" />
      <Compile Include="Assets\Scripts\TopDownControls.cs" />

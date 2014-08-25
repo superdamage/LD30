@@ -1,15 +1,16 @@
 ﻿<Properties>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="MonoDevelop.Default" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/RockDragger.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/SnapToTarget.cs">
     <Files>
       <File FileName="Assets/Scripts/Rock.cs" Line="33" Column="5" />
       <File FileName="Assets/Scripts/RockPlaceholder.cs" Line="36" Column="2" />
       <File FileName="Assets/Scripts/LevelLoader.cs" Line="106" Column="3" />
       <File FileName="Assets/Scripts/CamerFocusSwitcher.cs" Line="41" Column="18" />
-      <File FileName="Assets/Scripts/RockDragger.cs" Line="55" Column="1" />
+      <File FileName="Assets/Scripts/RockDragger.cs" Line="29" Column="34" />
       <File FileName="Assets/Scripts/CameraFollowBounds.cs" Line="41" Column="24" />
       <File FileName="Assets/Levels/level1.json" Line="4" Column="2" />
       <File FileName="Assets/Scripts/TopDownControls.cs" Line="61" Column="31" />
+      <File FileName="Assets/Scripts/SnapToTarget.cs" Line="24" Column="46" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
