@@ -28,16 +28,27 @@ public class Mars : MonoBehaviour {
 
 	public RockGenerator rockGenerator;
 
-	private float SOL_IN_HOURS = 24*2.7f;
+	private float SOL_IN_HOURS = (24*1.027f);
 	private float SOL_IN_SECONDS;
 	public float timeScale = 1;
 	public float secondsSpent = 0;
 	public float secondsUntilNextSol = 0;
 	public float hoursUntilNextSol = 0;
+	public float percentTimeLeftForNextSol;
+	public float currentSol = 0;
+	public bool isDay = false;
+	public float darkness = 0;
+
+	public GUIText solCounterText;
+
+	private float timeOffset = 0;
 
 	void Start () {
 
 		SOL_IN_SECONDS = SOL_IN_HOURS * 60 * 60;
+
+		// time offset 
+		timeOffset = SOL_IN_SECONDS/4; // daybreak
 
 		worldBunds = new Rect();
 
@@ -110,11 +121,25 @@ public class Mars : MonoBehaviour {
 	
 	void Update () {
 
-		secondsSpent = Time.time * timeScale;
-		secondsUntilNextSol = SOL_IN_SECONDS - (secondsSpent % SOL_IN_SECONDS);
-		hoursUntilNextSol = secondsUntilNextSol / (60*60);
+		// timekeeping
 
-		Debug.Log ("ss "+secondsSpent+" huns "+hoursUntilNextSol);
+		secondsSpent = timeOffset + Time.time * timeScale;
+		percentTimeLeftForNextSol = 1 - (secondsSpent % SOL_IN_SECONDS) / SOL_IN_SECONDS;
+		secondsUntilNextSol = SOL_IN_SECONDS * percentTimeLeftForNextSol;
+		hoursUntilNextSol = SOL_IN_HOURS * percentTimeLeftForNextSol;
+		currentSol = secondsSpent / SOL_IN_SECONDS;
+
+		bool wasDay = isDay;
+		isDay = percentTimeLeftForNextSol <= 0.5f;
+		if (wasDay != isDay) {
+			Debug.Log("new sol");
+		}
+
+		solCounterText.text = "SOL "+Mathf.Ceil(currentSol);
+		darkness = Mathf.Abs(((1 - percentTimeLeftForNextSol) - 0.5f) / 0.5f);
+
+		//Debug.Log ("darkness "+darkness);
+		//Debug.Log (percentTimeLeftForNextSol+" day: "+isDay);
 
 	}
 }

@@ -19,6 +19,8 @@ public class CamerFocusSwitcher : MonoBehaviour {
 	private float topBound;
 	private float bottomBound;
 
+	public Renderer nightosphere;
+
 
 	public Mars mars;
 
@@ -50,42 +52,14 @@ public class CamerFocusSwitcher : MonoBehaviour {
 			speed = 0.2f;
 		}
 
-		//roverScreen.transform.enabled = playerIsInRover;
-		//roverScreen.setPowerOn(playerIsInRover);
+		// set nightosphere
+		Color c = nightosphere.material.color;
+		c.a = mars.darkness*0.85f;
+		nightosphere.material.color = c;
 
 		positionTarget = clampBounds (positionTarget);
 
-		/*
-		targetPosition.
-		transform.position = Vector3.Lerp(this.transform.position, new Vector3(0.0512155,0.5632893,5.466473), 0.2);
-		*/
 
-		/*
-		if (smoothness > 0) {
-
-			//focusTransform.Translate(positionTarget-focusTransform.position * smoothness);
-			//transform.Translate (transform.position - head.position * smooth);
-
-			//focusTransform.position += (positionTarget-focusTransform.position)/30;
-
-			//focusTransform.position = Vector3.Lerp (focusTransform.position, positionTarget, smoothness);
-			focusTransform.position = Vector3.Lerp (positionTarget, focusTransform.position, smoothness);
-
-			// camera size lerp
-			Vector2 cn = new Vector2(Camera.main.orthographicSize,Camera.main.orthographicSize);
-			Vector2 ct = new Vector2(cameraSize,cameraSize);
-			cameraSize = Vector2.Lerp(cn,ct,smoothness).x;
-
-			//Camera.main.orthographicSize += (cameraSize - Camera.main.orthographicSize)/30;
-
-		} else {
-
-
-
-		}
-		*/
-
-		//iTween.ValueTo(follower
 		if (speed >= 0) {
 			iTween.MoveUpdate (this.gameObject, positionTarget, speed);
 			Camera.main.orthographicSize += (cameraSize - Camera.main.orthographicSize)/10;
@@ -93,12 +67,6 @@ public class CamerFocusSwitcher : MonoBehaviour {
 			this.transform.position = positionTarget;
 			Camera.main.orthographicSize = cameraSize;
 		}
-
-		//iTween.MoveUpdate (follower.gameObject, positionTarget, speed);
-		//focusTransform.position = positionTarget;
-		//Camera.main.orthographicSize = cameraSize;
-			
-
 
 	}
 
