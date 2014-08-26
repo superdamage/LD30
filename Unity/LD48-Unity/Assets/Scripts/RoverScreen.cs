@@ -35,13 +35,15 @@ public class RoverScreen : MonoBehaviour {
 
 	string printScreen(){
 
-		string text = "EARTH:\n"+levelLoader.currentQuestion;
+		string text = "EARTH:\n";
+		text += "------\n";
+		text += levelLoader.currentQuestion;
 
 		string linedText = "";
 		int numChars = text.Length;
 		int charIndex = 0;
 		int charsInLine = 0;
-		int lineCount = 2;
+		int lineCount = 3;
 
 		while (numChars>0) {
 
@@ -65,15 +67,20 @@ public class RoverScreen : MonoBehaviour {
 		}
 
 		// print print seperator
-		linedText += "\n- - - - - - - - - - - - - - - -";
+		linedText += "\n_______________________________";
+		//linedText += "\n-------------------------------";
 
 		linedText += "\n"; // gap
 
 		// print life support
-		linedText += "\nLIFE SUPPORT LEFT : " +lifeSupport+" SOLS";
+		linedText += "\nLIFE SUPPORT LEFT:       " +lifeSupport+" SOLS";
 
 		// print life support
-		linedText += "\nTIME UNTIL NEXT SOL : " +lifeSupport;
+		string d1 = ""+(int)mars.hoursUntilNextSol;
+		string d2 = ""+(int)((mars.secondsUntilNextSol/60)%60);
+		if (d1.Length < 2)d1 = "0" + d1;
+		if (d2.Length < 2)d2 = "0" + d2;
+		linedText += "\nHOURS UNTIL NEXT SOL:     " +d1+":"+d2;
 
 		return linedText;
 	}
@@ -86,7 +93,7 @@ public class RoverScreen : MonoBehaviour {
 
 		Debug.Log ("cs "+mars.currentSol);
 		lifeSupport = startingLifeSupport - mars.currentSol;
-		if (lifeSupport <= 0) {
+		if (lifeSupport <= -1) { // dies when next hungry not when it diminishes
 			Application.LoadLevel("Death");
 		}
 	}

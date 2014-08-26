@@ -36,7 +36,6 @@ public class Mars : MonoBehaviour {
 	public float hoursUntilNextSol = 0;
 	public float percentTimeLeftForNextSol;
 	public int currentSol = 0;
-	public bool isDay = false;
 	public float darkness = 0;
 	public bool isEarthVisible = false;
 
@@ -47,6 +46,9 @@ public class Mars : MonoBehaviour {
 	private float timeOffset = 0;
 
 	private float timeSceneEntered = 0;
+
+	private float lastTimeSolCounterDisplayed = 0;
+	private float solCounterDuration = 2.5f;
 
 	void Start () {
 
@@ -131,25 +133,37 @@ public class Mars : MonoBehaviour {
 		// when game resets, time adds up so i had to subtract scene starting time
 		float relativeTime = Time.time - timeSceneEntered;
 
+		int oldSol = currentSol;
+
 		secondsSpent = timeOffset + relativeTime * timeScale;
 		percentTimeLeftForNextSol = 1 - (secondsSpent % SOL_IN_SECONDS) / SOL_IN_SECONDS;
 		secondsUntilNextSol = SOL_IN_SECONDS * percentTimeLeftForNextSol;
 		hoursUntilNextSol = SOL_IN_HOURS * percentTimeLeftForNextSol;
 		currentSol = (int)Mathf.Ceil(secondsSpent / SOL_IN_SECONDS);
 
-		bool wasDay = isDay;
-		isDay = percentTimeLeftForNextSol <= 0.5f;
-		if (wasDay != isDay) {
-			newSol();
-		}
+		solCounterText.text = "SOL "+currentSol;
+
 
 		darkness = Mathf.Abs(((1 - percentTimeLeftForNextSol) - 0.5f) / 0.5f);
 		isEarthVisible = darkness <= 0.5;
 
+		if (oldSol != currentSol) {
+			newSol();
+		}
+
+		if (Time.time > lastTimeSolCounterDisplayed + solCounterDuration) {
+			solCounterText.enabled = false;
+		}
 	}
 
 	void newSol(){
-		solCounterText.text = "SOL "+currentSol;
 
+		//Color c = solCounterText.color;
+		//c.a = 1;
+		solCounterText.enabled = true;
+
+		lastTimeSolCounterDisplayed = Time.time;
 	}
+
+
 }
