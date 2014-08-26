@@ -35,15 +35,22 @@ public class Mars : MonoBehaviour {
 	public float secondsUntilNextSol = 0;
 	public float hoursUntilNextSol = 0;
 	public float percentTimeLeftForNextSol;
-	public float currentSol = 0;
+	public int currentSol = 0;
 	public bool isDay = false;
 	public float darkness = 0;
+	public bool isEarthVisible = false;
 
 	public GUIText solCounterText;
 
+	public Rover rover;
+
 	private float timeOffset = 0;
 
+	private float timeSceneEntered = 0;
+
 	void Start () {
+
+		timeSceneEntered = Time.time;
 
 		SOL_IN_SECONDS = SOL_IN_HOURS * 60 * 60;
 
@@ -121,25 +128,28 @@ public class Mars : MonoBehaviour {
 	
 	void Update () {
 
-		// timekeeping
+		// when game resets, time adds up so i had to subtract scene starting time
+		float relativeTime = Time.time - timeSceneEntered;
 
-		secondsSpent = timeOffset + Time.time * timeScale;
+		secondsSpent = timeOffset + relativeTime * timeScale;
 		percentTimeLeftForNextSol = 1 - (secondsSpent % SOL_IN_SECONDS) / SOL_IN_SECONDS;
 		secondsUntilNextSol = SOL_IN_SECONDS * percentTimeLeftForNextSol;
 		hoursUntilNextSol = SOL_IN_HOURS * percentTimeLeftForNextSol;
-		currentSol = secondsSpent / SOL_IN_SECONDS;
+		currentSol = (int)Mathf.Ceil(secondsSpent / SOL_IN_SECONDS);
 
 		bool wasDay = isDay;
 		isDay = percentTimeLeftForNextSol <= 0.5f;
 		if (wasDay != isDay) {
-			Debug.Log("new sol");
+			newSol();
 		}
 
-		solCounterText.text = "SOL "+Mathf.Ceil(currentSol);
 		darkness = Mathf.Abs(((1 - percentTimeLeftForNextSol) - 0.5f) / 0.5f);
+		isEarthVisible = darkness <= 0.5;
 
-		//Debug.Log ("darkness "+darkness);
-		//Debug.Log (percentTimeLeftForNextSol+" day: "+isDay);
+	}
+
+	void newSol(){
+		solCounterText.text = "SOL "+currentSol;
 
 	}
 }

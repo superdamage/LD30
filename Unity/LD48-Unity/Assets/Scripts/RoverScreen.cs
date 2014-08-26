@@ -17,15 +17,18 @@ public class RoverScreen : MonoBehaviour {
 
 	public LevelLoader levelLoader;
 
+	public Mars mars;
+
 	//private bool powerOn;
 	// Use this for initialization
 	void Start () {
 
 		background = GetComponent<GUITexture> ();
 
+		startingLifeSupport += 1; // for past day (spends immediately)
+
 		lifeSupport = startingLifeSupport;
 
-		//question = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla tristique nec mauris a sagittis. Nam lobortis ornare semper. Mauris feugiat tortor sed turpis dictum, ultrices venenatis nibh tempus.";
 		printScreen ();
 
 	}
@@ -33,8 +36,6 @@ public class RoverScreen : MonoBehaviour {
 	string printScreen(){
 
 		string text = "EARTH:\n"+levelLoader.currentQuestion;
-
-		Debug.Log (text);
 
 		string linedText = "";
 		int numChars = text.Length;
@@ -82,6 +83,12 @@ public class RoverScreen : MonoBehaviour {
 		string cleanText = printScreen ();
 		string glitchedText = cleanText;
 		screenGUIText.text = glitchedText;
+
+		Debug.Log ("cs "+mars.currentSol);
+		lifeSupport = startingLifeSupport - mars.currentSol;
+		if (lifeSupport <= 0) {
+			Application.LoadLevel("Death");
+		}
 	}
 
 	public void setOn(bool _on){
