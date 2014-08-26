@@ -135,18 +135,30 @@ public class LevelLoader : MonoBehaviour {
 		placeholder.parent = this.gameObject.transform;
 		RockPlaceholder ph = placeholder.GetComponent("RockPlaceholder") as RockPlaceholder;
 		ph.rockDragger = rockDragger;
-		ph.setDash(code==morse.dash);	
+		ph.setDash(code==morse.dash);
+
+		placeholders.Add (ph);
 
 	}
 
 	public bool check(){
+
+		string debug = "";
+
 		bool correct = true;
 		for (int i=0; i<placeholders.Count; i++) {
 			RockPlaceholder holder = placeholders[i];
+
+			bool letterCorrect = holder.isCorrect();
+			debug += (letterCorrect+",");
+
 			if(holder.isCorrect() == false){
 				correct = false;
 			}
 		}
+
+		Debug.Log(debug);
+
 		return correct;
 	}
 

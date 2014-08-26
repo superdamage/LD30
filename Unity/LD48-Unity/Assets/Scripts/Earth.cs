@@ -7,18 +7,23 @@ public class Earth : MonoBehaviour {
 
 	public LevelLoader levelLoader;
 
-	public GUITexture couldNotDecode;
-	public GUITexture couldDecode;
-	public GUITexture newMessage;
+	public SpriteRenderer couldNotDecode;
+	public SpriteRenderer couldDecode;
+	public SpriteRenderer newMessage;
 
-	private float tryToDecodeTime = Mathf.Infinity;
+	private float didDecodeMark = Mathf.Infinity;
 
-	private float telemetryDelay = 4.0f;
+	private bool earthWillRespond = false;
 
-	private bool willLoadNewLevel = false;
+	//private float tryToDecodeTime = Mathf.Infinity;
+
+	private float telemetryDelay = 2.0f;
+
+	private bool willLoadNewLevel = false; // should enter rover, wont decode as message is old
 
 
-	bool decoding = false;
+
+	private float solMark = Mathf.Infinity;
 
 	// Use this for initialization
 	void Start () {
@@ -26,33 +31,24 @@ public class Earth : MonoBehaviour {
 	}
 
 	public void newSol(){
-		tryToDecodeTime = Time.time + telemetryDelay;
 
+		solMark = Time.time;
 	}
 
-	private void tryToDecode(){
-		tryToDecodeTime = Mathf.Infinity;
-		decoding = true;
-
-
-	}
-	
-	// Update is called once per frame
 	void Update () {
 
 		float t = Time.time;
 
-		if (t >= tryToDecodeTime)tryToDecode();
-
-		if (mars.isEarthVisible == false){ 
-			Debug.Log("night");
-			decoding = false;
+		// can decode
+		if(t>solMark+telemetryDelay && mars.isEarthVisible && willLoadNewLevel == false && earthWillRespond == false){
+			decode();
+		}else{
+			//Debug.Log("not decoding");
 		}
 
-		if (decoding) {
-			decode ();
-		}else{
-			Debug.Log("not decoding");
+		if (t > didDecodeMark + telemetryDelay && willLoadNewLevel == false) {
+			didDecodeMark = Mathf.Infinity;
+			onNewMessage();
 		}
 
 		if (Input.GetKeyDown ("space")) {
@@ -64,22 +60,29 @@ public class Earth : MonoBehaviour {
 	}
 
 	void decode(){
-		if (levelLoader.currentLevel < 0) {
-			onNewMessage();
-			decoding = false;
-		}else{
-			bool decoded = levelLoader.check();
-			Debug.Log("Decode: "+decoded);
-		}
+
+		bool decoded = levelLoader.check();
+		if (decoded && levelLoader.currentLevel < 0) { // first level
+			earthWillRespond = true;
+			didDecodeMark = Time.time;
+			//onNewMessage();
+		}else if(decoded == true){
+			showCutscene(couldDecode);
+			earthWillRespond = true;
+			didDecodeMark = Time.time;
+		}/*else if(decoded == false){
+			showCutscene(couldNotDecode);
+		}*/
 	}
 
 	void onNewMessage(){
 		//newMessage.enabled = true;
 		showCutscene (newMessage);
 		willLoadNewLevel = true;
+		earthWillRespond = false;
 	}
 
-	void showCutscene(GUITexture newMessage){
+	void showCutscene(SpriteRenderer newMessage){
 		newMessage.enabled = true;
 		Time.timeScale = 0.0f; // pause
 	}
@@ -87,7 +90,8 @@ public class Earth : MonoBehaviour {
 	public void playerIsInRover(){
 		if (willLoadNewLevel) { // test level progression by uncommenting this
 			levelLoader.nextLevel ();
-			decoding = true;
+			//decoding = true;
+			//Debug.Log("set true2");
 			willLoadNewLevel = false;
 		}
 

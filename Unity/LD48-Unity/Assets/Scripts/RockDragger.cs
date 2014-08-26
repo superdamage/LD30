@@ -1,26 +1,33 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 public class RockDragger : MonoBehaviour {
 
-	public Collider2D pullCandidate;
+	private Collider2D pullCandidate;
 	public DistanceJoint2D activeJoint = null;
 
 	public AudioSource strainSFX;
 
 	public SnapToTarget dragTargetIndicator;
 
+	private List<Collider2D> pullCandidates;
+
 	// Use this for initialization
 	void Start () {
-		
+		pullCandidates = new List<Collider2D> ();
 	}
 	
 	// Update is called once per frame
 	void Update () {
+
+		pullCandidate = closestCandidate();
+
 		if (Input.GetKeyDown ("space")) {
 
-			if (pullCandidate != null && activeJoint == null) {
 
+
+			if (pullCandidate != null && activeJoint == null) {
 				startPulling();
 			}
 
@@ -39,6 +46,26 @@ public class RockDragger : MonoBehaviour {
 		}else{
 			dragTargetIndicator.target = null;
 		}
+	}
+
+	private Collider2D closestCandidate(){
+
+		float closestDistance = Mathf.Infinity;
+		Collider2D closest = null;
+		for(int i=0; i<pullCandidates.Count; i++){
+			Collider2D rock = pullCandidates[i];
+			if(rock == null)continue;
+
+			Vector2 rock_pos = rock.transform.position;
+			Vector2 player_pos = transform.position;
+			float d = Vector2.Distance(rock_pos,player_pos);
+			if(d<closestDistance){
+				closest = rock;
+				closestDistance = d;
+			}
+		}
+
+		return closest;
 	}
 
 	void startPulling(){
@@ -67,7 +94,12 @@ public class RockDragger : MonoBehaviour {
 		Rock r = o.GetComponent<Rock> ();
 		if (r != null) {
 
+			pullCandidates.Add(o);
+
+			/*
 			if(pullCandidate!=null){
+
+
 				Vector2 oldc_pos = pullCandidate.transform.position;
 				Vector2 player_pos = transform.position;
 				Vector2 newc_pos = o.transform.position;
@@ -79,10 +111,13 @@ public class RockDragger : MonoBehaviour {
 					pullCandidate = o;
 				}
 
+
 			}else{
 				pullCandidate = o;
 			}
+			*/
 
+			//pullCandidate = o;
 			//swapDragTarget(r);
 
 
@@ -110,9 +145,13 @@ public class RockDragger : MonoBehaviour {
 
 	void OnTriggerExit2D(Collider2D o){
 
+		pullCandidates.Remove (o);
+
+		/*
 		if(pullCandidate == o){
 			pullCandidate = null;
 		}
+		*/
 
 	}
 

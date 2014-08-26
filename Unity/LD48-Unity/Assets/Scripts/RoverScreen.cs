@@ -94,7 +94,7 @@ public class RoverScreen : MonoBehaviour {
 		string glitchedText = cleanText;
 		screenGUIText.text = glitchedText;
 
-		Debug.Log ("cs "+mars.currentSol);
+		//Debug.Log ("cs "+mars.currentSol);
 		lifeSupport = startingLifeSupport - mars.currentSol;
 		if (lifeSupport <= -1) { // dies when next hungry not when it diminishes
 			Application.LoadLevel("Death");
