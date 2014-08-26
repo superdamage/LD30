@@ -8,19 +8,23 @@ public class RockPlaceholder : MonoBehaviour {
 	public Sprite incorrectSprite;
 	public Sprite correctSprite;
 
-	private bool isDash;
+	private bool _isDash;
 
-	private Rock snappedRock;
+	public Rock snappedRock;
 
 	public RockDragger rockDragger;
 
 	private SpriteRenderer spriteRenderer;
 
-	public LevelLoader levelLoader;
+	//public LevelLoader levelLoader;
+	public RockGenerator rocks;
+
+	private float markTimeCreated = 0;
+	private float clearTime = 0.6f;
 
 	// Use this for initialization
 	void Start () {
-
+		markTimeCreated = Time.time;
 	}
 	
 	// Update is called once per frame
@@ -28,9 +32,13 @@ public class RockPlaceholder : MonoBehaviour {
 	
 	}
 
-	public void setDash(bool _isDash){
-		isDash = _isDash;
-		setSprite (isDash ? dashSprite : dotSprite);
+	public void setDash(bool dash){
+		_isDash = dash;
+		setSprite (_isDash ? dashSprite : dotSprite);
+	}
+
+	public bool isDash(){
+		return _isDash;
 	}
 
 	void setSprite(Sprite sprite){
@@ -41,7 +49,15 @@ public class RockPlaceholder : MonoBehaviour {
 	void OnTriggerEnter2D(Collider2D o){
 		Rock r = o.GetComponent<Rock> ();
 		if (r != null) {
-			if(r.Dark == isDash){
+
+			if(Time.time<(markTimeCreated+clearTime)){ // clear it
+
+				Debug.Log("clear time");
+				r.relocate();
+				return;	
+			}
+
+			if(r.Dark == _isDash){
 				snap(r);
 				setSprite(correctSprite);
 			}else if(snappedRock==null){
@@ -52,6 +68,7 @@ public class RockPlaceholder : MonoBehaviour {
 		}
 		
 	}
+
 
 	public bool isCorrect(){
 		//SpriteRenderer spriteRenderer = transform.GetComponent ("SpriteRenderer") as SpriteRenderer;
@@ -81,19 +98,12 @@ public class RockPlaceholder : MonoBehaviour {
 			if(snappedRock == r){
 				//snappedRock.setFixed(false);
 				snappedRock = null;
-				setDash(isDash);
+				setDash(_isDash);
 			}else if(snappedRock==null){
-				setDash(isDash);
+				setDash(_isDash);
 			}
 		}
 		
 	}
-
-	void attract(){
-		if (isCorrect () == false) {
-
-		}
-	}
-
 
 }

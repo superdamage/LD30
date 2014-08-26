@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 public class RockGenerator : MonoBehaviour {
 
@@ -8,11 +9,13 @@ public class RockGenerator : MonoBehaviour {
 
 	private Rect worldBounds;
 
+	public List<Rock> rocks;
+
 	
 	// Use this for initialization
 	void Start () {
 
-
+		rocks = new List<Rock> ();
 
 	}
 
@@ -21,15 +24,26 @@ public class RockGenerator : MonoBehaviour {
 
 		while (numRocks>0) {
 
-			Vector3 pos = randomPositon();
-			Transform rock = Instantiate (rockPrefab, pos, Quaternion.identity) as Transform;
-			Rock rockGO = rock.gameObject.GetComponent<Rock>();
-			rockGO.Dark = Random.Range(0,2)==0;
-			rock.parent = this.gameObject.transform;
+			bool dark = Random.Range(0,2)==0;
+			addRock(dark);
 
 			numRocks--;
 
 		}
+	}
+
+	public Rock addRock(bool dark){
+
+		Vector3 pos = randomPositon();
+		Transform rock = Instantiate (rockPrefab, pos, Quaternion.identity) as Transform;
+		Rock rockGO = rock.gameObject.GetComponent<Rock>();
+		rockGO.Dark = dark;
+		rock.parent = this.gameObject.transform;
+		rockGO.generator = this;
+		rocks.Add(rockGO);
+
+		return rockGO;
+
 	}
 
 
@@ -50,7 +64,7 @@ public class RockGenerator : MonoBehaviour {
 		Generate (worldBounds);
 
 	}
-	
+
 	// Update is called once per frame
 	void Update () {
 		

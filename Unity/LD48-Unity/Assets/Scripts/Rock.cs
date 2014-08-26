@@ -8,6 +8,8 @@ public class Rock : MonoBehaviour {
 	public Transform rockShadowPrefab;
 	private AudioSource dragSFXSource;
 
+	public RockGenerator generator;
+
 	public Transform shadow;
 
 	private float sfxMinVelocity = 0.2f;
@@ -73,10 +75,8 @@ public class Rock : MonoBehaviour {
 		shadowPosition.z = -0.6f;
 		shadow.position = shadowPosition;
 
-
-
-
 	}
+	
 
 	void OnCollisionEnter2D(Collision2D o){
 		if (o.gameObject.tag == "Rover") {
@@ -114,7 +114,7 @@ public class Rock : MonoBehaviour {
 		*/
 	}
 
-	void relocate(){
+	public void relocate(){
 
 		this.transform.rigidbody2D.velocity = Vector2.zero;
 

@@ -30,6 +30,13 @@ public class LevelLoader : MonoBehaviour {
 
 	public Vector2 sentenceSize = new Vector2();
 
+	public RockGenerator rockGenerator;
+
+	private int lastLevelIndex = 0;
+
+	//private float timeMarkJustRendered = 0;
+	//private float clearTime = 1;
+
 
 	public string currentQuestion = "";
 
@@ -39,29 +46,36 @@ public class LevelLoader : MonoBehaviour {
 		
 	}
 
-	public void nextLevel(){
+	public bool nextLevel(){
 		currentLevel++;
 		destroyCurrentLevel ();
-		renderLevel (currentLevel);
+		return renderLevel (currentLevel);
 	}
 
 	void destroyCurrentLevel(){
+
 		U = 0;
 		V = 0;
 
 		if (placeholders != null) {
+
 			for(int i=0; i<placeholders.Count; i++){
-				Destroy(placeholders[i].gameObject);
+				RockPlaceholder ph = placeholders[i];
+				//rockGenerator.replace(ph.snappedRock);
+				Destroy(ph.gameObject);
 			}
 		}
 
 		placeholders = new List<RockPlaceholder> ();
 	}
 
-	void renderLevel(int levelIndex){
+	bool renderLevel(int levelIndex){
 
 		string jsonString = levelsAsset.text;
 		List<JSONObject> levelDatas = new JSONObject (jsonString).list;
+		lastLevelIndex = levelDatas.Count-1;
+		if (levelIndex >= lastLevelIndex)return false; // no more levels
+
 		JSONObject levelData = levelDatas [levelIndex];
 		string q = levelData["question"].str;
 		string a = levelData["decoded"].str;
@@ -74,6 +88,8 @@ public class LevelLoader : MonoBehaviour {
 		currentQuestion = q;
 
 		string debugEncoedWords = "";
+
+		//if (decoded_answer.Length <= 0)return;
 
 		int[][] encoded_answer = morse.encode (decoded_answer);
 
@@ -99,6 +115,11 @@ public class LevelLoader : MonoBehaviour {
 
 		}
 		Debug.Log ("dec:"+decoded_answer+" enc:"+ debugEncoedWords);
+
+
+		return true;
+
+		//timeMarkJustRendered = Time.time;
 	}
 
 	void beginNewSentence(int numLines){
@@ -117,6 +138,8 @@ public class LevelLoader : MonoBehaviour {
 	void beginNewLine(int line,int numCodes){
 		U = 0;
 		V++;
+
+		Debug.Log("nl");
 
 		float lineWidth = gap.x * numCodes;
 
@@ -147,6 +170,8 @@ public class LevelLoader : MonoBehaviour {
 
 		string debug = "";
 
+		if (placeholders.Count <= 0)return false;
+
 		bool correct = true;
 		for (int i=0; i<placeholders.Count; i++) {
 			RockPlaceholder holder = placeholders[i];
@@ -165,6 +190,83 @@ public class LevelLoader : MonoBehaviour {
 	}
 
 	void Update () {
-	
+		if (Input.GetKeyDown ("c")) {
+			cheat();
+		}
+
+		/*
+		if (Time.time < (timeMarkJustRendered + clearTime)) {
+			Debug.Log("cleartime");
+		}
+		*/
 	}
+
+	void cheat() {
+
+		//List<Rock> usedRocks = new List<Rock> ();
+
+		Debug.Log ("phc " + placeholders.Count);
+
+		for(int p=0; p<placeholders.Count; p++){
+
+			RockPlaceholder rp = placeholders[p];
+
+			if(rp.isCorrect())continue;
+
+			Debug.Log("rp "+rockGenerator);
+			Rock r = rockGenerator.addRock(rp.isDash());
+			Vector3 pos = rp.transform.position;
+			pos.z = r.transform.position.z;
+			r.transform.position = pos;
+
+
+			/*
+
+			bool found = false;
+
+			while(found == false){
+
+			for (int i=0; i<rockGenerator.rocks.Count; i++) {
+				Rock r = rockGenerator.rocks[i];
+			
+				if(r!=null && rp!=null ){
+					
+					if(r.Dark == rp.isDash() ){
+				
+				if(usedRocks.Contains(r) == false){
+					//move
+					Vector3 pos = rp.transform.position;
+					pos.z = r.transform.position.z;
+					r.transform.position = pos;
+					
+					usedRocks.Add(r);
+					
+					found = true;
+					
+					Debug.Log("found");
+					
+					break;
+				}
+				
+				
+				
+			}
+			
+		}
+		
+	}
+	
+}
+
+			 */
+
+
+
+		}
+
+
+
+
+	}
+
 }

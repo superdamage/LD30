@@ -28,6 +28,10 @@ public class Morse{
 
 	public int[][] encode(string sentence){
 
+		if (sentence.Length <= 0){
+			return new int[0][]{};
+		}
+
 		string[] words  = sentence.Split (' ');
 		string[] morseWords = new string[words.Length];
 
