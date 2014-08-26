@@ -11,13 +11,15 @@ public class Earth : MonoBehaviour {
 	public SpriteRenderer couldDecode;
 	public SpriteRenderer newMessage;
 
+	public RoverScreen roverScreen;
+
 	private float didDecodeMark = Mathf.Infinity;
 
 	private bool earthWillRespond = false;
 
 	//private float tryToDecodeTime = Mathf.Infinity;
 
-	private float telemetryDelay = 2.0f;
+	private float telemetryDelay = 3.0f;
 
 	private bool willLoadNewLevel = false; // should enter rover, wont decode as message is old
 
@@ -78,6 +80,7 @@ public class Earth : MonoBehaviour {
 	void onNewMessage(){
 		//newMessage.enabled = true;
 		showCutscene (newMessage);
+
 		willLoadNewLevel = true;
 		earthWillRespond = false;
 	}
@@ -85,6 +88,7 @@ public class Earth : MonoBehaviour {
 	void showCutscene(SpriteRenderer newMessage){
 		newMessage.enabled = true;
 		Time.timeScale = 0.0f; // pause
+		roverScreen.setOn (false);
 	}
 
 	public void playerIsInRover(){

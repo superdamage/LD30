@@ -13,7 +13,7 @@ public class RoverScreen : MonoBehaviour {
 	public int startingLifeSupport = 10;
 	private int lifeSupport;
 
-	private int numLineCapacity = 13;
+	private int numLineCapacity = 12;
 
 	public LevelLoader levelLoader;
 
@@ -21,6 +21,8 @@ public class RoverScreen : MonoBehaviour {
 	public Earth earth;
 
 	private bool on = false;
+
+	public GUIText visibilityIndicator;
 
 	//private bool powerOn;
 	// Use this for initialization
@@ -71,7 +73,6 @@ public class RoverScreen : MonoBehaviour {
 
 		// print print seperator
 		linedText += "\n_______________________________";
-		//linedText += "\n-------------------------------";
 
 		linedText += "\n"; // gap
 
@@ -84,6 +85,10 @@ public class RoverScreen : MonoBehaviour {
 		if (d1.Length < 2)d1 = "0" + d1;
 		if (d2.Length < 2)d2 = "0" + d2;
 		linedText += "\nHOURS UNTIL NEXT SOL:     " +d1+":"+d2;
+
+		// satelite imagery coverage
+		linedText += "\nSATELITE IMAGERY COVERAGE:  "+ (mars.isEarthVisible?"YES":" NO");
+		visibilityIndicator.enabled = !mars.isEarthVisible;
 
 		return linedText;
 	}

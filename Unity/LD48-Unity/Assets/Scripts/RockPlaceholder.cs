@@ -16,6 +16,8 @@ public class RockPlaceholder : MonoBehaviour {
 
 	private SpriteRenderer spriteRenderer;
 
+	public LevelLoader levelLoader;
+
 	// Use this for initialization
 	void Start () {
 
@@ -85,6 +87,12 @@ public class RockPlaceholder : MonoBehaviour {
 			}
 		}
 		
+	}
+
+	void attract(){
+		if (isCorrect () == false) {
+
+		}
 	}
 
 

@@ -11,6 +11,8 @@ public class LevelLoader : MonoBehaviour {
 
 	public TextAsset levelsAsset;
 
+	public GUIText visibiltyIndicator;
+
 	//public TextAsset[] levelAssets;
 	public TextAsset morseTextAsset;
 
