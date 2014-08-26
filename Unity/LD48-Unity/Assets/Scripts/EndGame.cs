@@ -16,14 +16,14 @@ public class EndGame : MonoBehaviour {
 		if (Time.time >= (timeSceneEntered + dismissDuration)) {
 			dismiss();
 		}
-
+		
 		if (Input.GetKeyDown ("space") || Input.GetMouseButtonDown(0)) {
 			dismiss();
 		}
 	}
 
 	void dismiss(){
-
+		
 		Application.LoadLevel (0);
 	}
 }

@@ -50,11 +50,16 @@ public class Mars : MonoBehaviour {
 	private float lastTimeSolCounterDisplayed = 0;
 	private float solCounterDuration = 2.5f;
 
+	public Earth earth;
+
+
 	void Start () {
 
 		timeSceneEntered = Time.time;
 
 		SOL_IN_SECONDS = SOL_IN_HOURS * 60 * 60;
+
+
 
 		// time offset 
 		timeOffset = SOL_IN_SECONDS/4; // daybreak
@@ -163,6 +168,8 @@ public class Mars : MonoBehaviour {
 		solCounterText.enabled = true;
 
 		lastTimeSolCounterDisplayed = Time.time;
+
+		earth.newSol ();
 	}
 
 

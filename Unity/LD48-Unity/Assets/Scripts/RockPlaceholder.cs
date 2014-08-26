@@ -14,9 +14,11 @@ public class RockPlaceholder : MonoBehaviour {
 
 	public RockDragger rockDragger;
 
+	private SpriteRenderer spriteRenderer;
+
 	// Use this for initialization
 	void Start () {
-	
+
 	}
 	
 	// Update is called once per frame
@@ -30,7 +32,7 @@ public class RockPlaceholder : MonoBehaviour {
 	}
 
 	void setSprite(Sprite sprite){
-		SpriteRenderer spriteRenderer = transform.GetComponent ("SpriteRenderer") as SpriteRenderer;
+		spriteRenderer = transform.GetComponent ("SpriteRenderer") as SpriteRenderer;
 		spriteRenderer.sprite = sprite;
 	}
 
@@ -47,6 +49,11 @@ public class RockPlaceholder : MonoBehaviour {
 
 		}
 		
+	}
+
+	public bool isCorrect(){
+		//SpriteRenderer spriteRenderer = transform.GetComponent ("SpriteRenderer") as SpriteRenderer;
+		return spriteRenderer.sprite == correctSprite;
 	}
 
 	void snap(Rock r){

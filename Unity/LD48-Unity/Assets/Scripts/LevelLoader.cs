@@ -33,11 +33,11 @@ public class LevelLoader : MonoBehaviour {
 
 	void Start () {
 		morse = new Morse (morseTextAsset.text);
-		nextLevel ();
+		//nextLevel ();
 		
 	}
 
-	void nextLevel(){
+	public void nextLevel(){
 		currentLevel++;
 		destroyCurrentLevel ();
 		renderLevel (currentLevel);
@@ -137,6 +137,17 @@ public class LevelLoader : MonoBehaviour {
 		ph.rockDragger = rockDragger;
 		ph.setDash(code==morse.dash);	
 
+	}
+
+	public bool check(){
+		bool correct = true;
+		for (int i=0; i<placeholders.Count; i++) {
+			RockPlaceholder holder = placeholders[i];
+			if(holder.isCorrect() == false){
+				correct = false;
+			}
+		}
+		return correct;
 	}
 
 	void Update () {

@@ -18,6 +18,9 @@ public class RoverScreen : MonoBehaviour {
 	public LevelLoader levelLoader;
 
 	public Mars mars;
+	public Earth earth;
+
+	private bool on = false;
 
 	//private bool powerOn;
 	// Use this for initialization
@@ -100,8 +103,15 @@ public class RoverScreen : MonoBehaviour {
 
 	public void setOn(bool _on){
 
-		background.enabled = _on;
-		screenGUIText.enabled = _on;
+		if (on == _on)return;
+
+		on = _on;
+		background.enabled = on;
+		screenGUIText.enabled = on;
+
+		if (on) {
+			earth.playerIsInRover();
+		}
 	}
 
 }
