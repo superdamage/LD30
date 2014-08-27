@@ -8,6 +8,8 @@ public class TopDownControls : MonoBehaviour{
 	private float curSpeed;
 	private float maxSpeed;
 
+	public Transform audioListener;
+
 	private float sfxMinVelocity = 0.5f;
 
 	public AudioSource footStepsSFX;
@@ -58,8 +60,13 @@ public class TopDownControls : MonoBehaviour{
 			footStepsSFX.enabled = true;
 
 			Quaternion r = transform.rotation;
-			r.y = (velocityX<=0)?180:0;
+			r.y = ((velocityX<=0)?180:0);
 			transform.rotation = r;
+
+
+			r.y = ((velocityX<=0)?0:180);
+			audioListener.transform.rotation = r;
+
 
 			animator.Play(dragging?"drag":"run");
 

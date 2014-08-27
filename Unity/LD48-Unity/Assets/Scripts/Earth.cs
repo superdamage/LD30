@@ -27,9 +27,15 @@ public class Earth : MonoBehaviour {
 
 	private float solMark = Mathf.Infinity;
 
+	private bool displayingDecodedMessage;
+
+	public SpriteRenderer missionUpdateIndicator;
+
 	// Use this for initialization
 	void Start () {
-	
+		Color c = missionUpdateIndicator.color;
+		c.a = 0;
+		missionUpdateIndicator.color = c;
 	}
 
 	public void newSol(){
@@ -38,6 +44,10 @@ public class Earth : MonoBehaviour {
 	}
 
 	void Update () {
+
+		if(displayingDecodedMessage){
+			return;
+		}
 
 		float t = Time.time;
 
@@ -59,6 +69,14 @@ public class Earth : MonoBehaviour {
 			newMessage.enabled = false;
 			Time.timeScale = 1.0f; // resume
 		}
+
+		missionUpdateIndicator.enabled = willLoadNewLevel;
+		// animate
+		Color c = missionUpdateIndicator.color;
+		c.a += Time.deltaTime * 1.2f;
+		if(c.a>=1)c.a = 0;
+		missionUpdateIndicator.color = c;
+
 	}
 
 	void decode(){
@@ -82,6 +100,14 @@ public class Earth : MonoBehaviour {
 		}/*else if(decoded == false){
 			showCutscene(couldNotDecode);
 		}*/
+	}
+
+	private void beginDisplayingDecodedMessage(){
+		
+	}
+
+	public void continueAfterDecodedDisplay(){
+		displayingDecodedMessage = false;
 	}
 
 	void onNewMessage(){
