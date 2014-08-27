@@ -34,11 +34,20 @@ public class LevelLoader : MonoBehaviour {
 
 	private int lastLevelIndex = 0;
 
-	//private float timeMarkJustRendered = 0;
-	//private float clearTime = 1;
+	public Transform letterContainer;
+	public Transform letterPrefab;
 
+	//decoded
+	private int decoded_wordIndex = 0;
+	private int decoded_letterIndex = 0;
+	private int decoded_letterSize = 0;
+	private int decoded_totalChars = 0;
+	private float decoded_totalLetterX = 0;
 
 	public string currentQuestion = "";
+	private string currentAnswer = "";
+
+
 
 	void Start () {
 		morse = new Morse (morseTextAsset.text);
@@ -85,6 +94,7 @@ public class LevelLoader : MonoBehaviour {
 		JSONObject levelData = levelDatas [levelIndex];
 		string q = levelData["question"].str;
 		string a = levelData["decoded"].str;
+		currentAnswer = a;
 		string decoded_answer = levelData["decoded"].str;
 
 		Debug.Log ("rendering level: "+levelIndex);
@@ -101,6 +111,8 @@ public class LevelLoader : MonoBehaviour {
 
 		beginNewSentence (encoded_answer.Length);
 
+		//int decodedLetterIndex = 0;
+
 		for (int w=0; w<encoded_answer.Length; w++) {
 
 			int numCodes = encoded_answer[w].Length;
@@ -110,6 +122,9 @@ public class LevelLoader : MonoBehaviour {
 			beginNewLine(w,numCodes);
 
 			for (int l=0; l<numCodes; l++) {
+
+				//Debug.Log("LT "+a[w]);
+
 				int code = encoded_answer[w][l];
 				debugEncoedWord += code;
 				putPlaceholder(code);
@@ -121,6 +136,8 @@ public class LevelLoader : MonoBehaviour {
 
 		}
 		Debug.Log ("dec:"+decoded_answer+" enc:"+ debugEncoedWords);
+
+		addLastLetter ();
 
 
 		return true;
@@ -141,6 +158,8 @@ public class LevelLoader : MonoBehaviour {
 		linePosStart.z = this.transform.position.z;
 	}
 
+
+
 	void beginNewLine(int line,int numCodes){
 		U = 0;
 		V++;
@@ -160,7 +179,11 @@ public class LevelLoader : MonoBehaviour {
 		linePos.x += U*gap.x;
 		U++;
 
-		if (code == morse.gap)return;
+		bool isGap = code == morse.gap;
+
+		setDecodedNextLetter(isGap);
+
+		if (isGap)return;
 
 		Transform placeholder = Instantiate (placeholderPrefab, linePos, Quaternion.identity) as Transform;
 		placeholder.parent = this.gameObject.transform;
@@ -170,6 +193,54 @@ public class LevelLoader : MonoBehaviour {
 
 		placeholders.Add (ph);
 
+	}
+
+	private void setDecodedNextLetter(bool ended){
+
+		decoded_letterSize++;
+
+		if(ended){
+			char c = currentAnswer[decoded_letterIndex];
+			putLetter(c,decoded_letterSize-1);
+			decoded_letterSize =0;
+			decoded_letterIndex++;
+		}
+
+	}
+
+	private void setDecodedNewLine(){
+		decoded_wordIndex++;
+		decoded_letterIndex = 0;
+	}
+
+	private void addLastLetter(){
+		setDecodedNextLetter (true);
+	}
+
+	private void putLetter(char l,int size){
+
+		Debug.Log (decoded_totalLetterX);
+
+		Debug.Log ("l "+l+
+		           " u:"+decoded_letterIndex+
+		           " v: "+decoded_wordIndex+
+		           " s"+decoded_letterSize);
+
+		Vector3 letterPos = letterContainer.transform.position;
+
+		float letterSize = 1;
+		float letterWidth = decoded_letterSize*letterSize;
+
+		Transform letterTransform = Instantiate (letterPrefab, letterPos, Quaternion.identity) as Transform;
+		letterTransform.parent = letterContainer;
+		TextMesh tm = letterTransform.GetComponent<TextMesh>() as TextMesh;
+		tm.text = ""+l;
+		letterPos.x = decoded_totalLetterX;
+		letterTransform.position = letterPos;
+
+		decoded_totalLetterX += letterWidth;
+
+		decoded_totalChars++;
 	}
 
 	public bool check(){
@@ -190,28 +261,18 @@ public class LevelLoader : MonoBehaviour {
 			}
 		}
 
-		Debug.Log(debug);
-
 		return correct;
 	}
 
 	void Update () {
+
 		if (Input.GetKeyDown ("c")) {
 			cheat();
 		}
 
-		/*
-		if (Time.time < (timeMarkJustRendered + clearTime)) {
-			Debug.Log("cleartime");
-		}
-		*/
 	}
 
 	void cheat() {
-
-		//List<Rock> usedRocks = new List<Rock> ();
-
-		Debug.Log ("phc " + placeholders.Count);
 
 		for(int p=0; p<placeholders.Count; p++){
 
@@ -224,54 +285,7 @@ public class LevelLoader : MonoBehaviour {
 			Vector3 pos = rp.transform.position;
 			pos.z = r.transform.position.z;
 			r.transform.position = pos;
-
-
-			/*
-
-			bool found = false;
-
-			while(found == false){
-
-			for (int i=0; i<rockGenerator.rocks.Count; i++) {
-				Rock r = rockGenerator.rocks[i];
-			
-				if(r!=null && rp!=null ){
-					
-					if(r.Dark == rp.isDash() ){
-				
-				if(usedRocks.Contains(r) == false){
-					//move
-					Vector3 pos = rp.transform.position;
-					pos.z = r.transform.position.z;
-					r.transform.position = pos;
-					
-					usedRocks.Add(r);
-					
-					found = true;
-					
-					Debug.Log("found");
-					
-					break;
-				}
-				
-				
-				
-			}
-			
 		}
-		
-	}
-	
-}
-
-			 */
-
-
-
-		}
-
-
-
 
 	}
 

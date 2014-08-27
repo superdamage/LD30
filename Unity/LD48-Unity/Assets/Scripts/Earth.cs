@@ -170,6 +170,8 @@ public class Earth : MonoBehaviour {
 			//decoding = true;
 			//Debug.Log("set true2");
 			willLoadNewLevel = false;
+		}else{
+			Debug.Log("ELSE");
 		}
 
 	}

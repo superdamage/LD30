@@ -18,7 +18,5 @@ public class CutsSceneScaleFixer : MonoBehaviour {
 		float newScale = defaultScale*Camera.main.orthographicSize/defaultCameraScale;
 		this.transform.localScale = new Vector3 (newScale,newScale,newScale);
 
-
-
 	}
 }
