@@ -51,6 +51,7 @@
      <Compile Include="Assets\JSON\VectorTemplates.cs" />
      <Compile Include="Assets\Scripts\CamerFocusSwitcher.cs" />
      <Compile Include="Assets\Scripts\CameraFollowBounds.cs" />
+     <Compile Include="Assets\Scripts\CutsSceneScaleFixer.cs" />
      <Compile Include="Assets\Scripts\Earth.cs" />
      <Compile Include="Assets\Scripts\EndGame.cs" />
      <Compile Include="Assets\Scripts\GUITextButton.cs" />

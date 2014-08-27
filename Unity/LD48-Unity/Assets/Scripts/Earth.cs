@@ -19,7 +19,7 @@ public class Earth : MonoBehaviour {
 
 	//private float tryToDecodeTime = Mathf.Infinity;
 
-	private float telemetryDelay = 3.5f;
+	public float telemetryDelay = 3.5f;
 
 	private bool willLoadNewLevel = false; // should enter rover, wont decode as message is old
 
@@ -27,13 +27,17 @@ public class Earth : MonoBehaviour {
 
 	private float solMark = Mathf.Infinity;
 
-	private bool displayingDecodedMessage;
+	private bool displayingDecodedMessage = false;
+	private float timeMarkBeganDisplayingDecodedMessage = 0;
+	private float decodedMessageDisplayDuration = 2.0f;
 
 	public AudioSource roverNewMessageSound;
 
 	public int debugForceNextLevel = -1;
 
 	public SpriteRenderer missionUpdateIndicator;
+
+	public CamerFocusSwitcher focusSwitcher;
 
 	// Use this for initialization
 	void Start () {
@@ -49,11 +53,16 @@ public class Earth : MonoBehaviour {
 
 	void Update () {
 
-		if(displayingDecodedMessage){
-			return;
-		}
-
 		float t = Time.time;
+
+		if(displayingDecodedMessage){
+			if((timeMarkBeganDisplayingDecodedMessage+decodedMessageDisplayDuration)<t){
+				endDisplayingDecodedMessage();
+			}else{
+				return;
+			}
+
+		}
 
 		// can decode
 		if(t>solMark+telemetryDelay && mars.isEarthVisible && willLoadNewLevel == false && earthWillRespond == false){
@@ -62,7 +71,7 @@ public class Earth : MonoBehaviour {
 			//Debug.Log("not decoding");
 		}
 
-		if (t > didDecodeMark + telemetryDelay && willLoadNewLevel == false) {
+		if (t > (didDecodeMark + telemetryDelay ) && willLoadNewLevel == false) {
 			didDecodeMark = Mathf.Infinity;
 			onNewMessage();
 		}
@@ -99,17 +108,34 @@ public class Earth : MonoBehaviour {
 			//onNewMessage();
 
 		}else if(decoded == true){
-			showCutscene(couldDecode);
-			earthWillRespond = true;
+
 			didDecodeMark = Time.time;
+			earthWillRespond = true;
+			beginDisplayingDecodedMessage();
+
 		}/*else if(decoded == false){
 			showCutscene(couldNotDecode);
 		}*/
 	}
 
 	private void beginDisplayingDecodedMessage(){
-	
-	
+		displayingDecodedMessage = true;
+		timeMarkBeganDisplayingDecodedMessage = Time.time;
+		focusSwitcher.forceOverview (true);
+	}
+
+	private void endDisplayingDecodedMessage(){
+
+		if(timeMarkBeganDisplayingDecodedMessage<=0) return;
+
+		Debug.Log ("endDisplayingDecodedMessage");
+
+		timeMarkBeganDisplayingDecodedMessage = 0;
+		focusSwitcher.forceOverview (false);
+
+		didDecodeMark = Time.time;
+
+		showCutscene(couldDecode);
 
 	}
 

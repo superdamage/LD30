@@ -21,6 +21,7 @@ public class CamerFocusSwitcher : MonoBehaviour {
 
 	public Renderer nightosphere;
 
+	private bool overViewForced = false;
 
 	public Mars mars;
 
@@ -40,7 +41,7 @@ public class CamerFocusSwitcher : MonoBehaviour {
 		float speed = 0;
 		float cameraSize = defaultCameraSize;
 
-		if (Input.GetKey("m")) {
+		if (Input.GetKey("m") || overViewForced) {
 			positionTarget = levelLoader.transform.position;
 			speed = 1.0f;
 			cameraSize = levelFocusCameraSize();
@@ -68,6 +69,10 @@ public class CamerFocusSwitcher : MonoBehaviour {
 			Camera.main.orthographicSize = cameraSize;
 		}
 
+	}
+
+	public void forceOverview(bool forced){
+		overViewForced = forced;
 	}
 
 	Vector3 clampBounds(Vector3 targetPos){
