@@ -46,8 +46,14 @@ public class LevelLoader : MonoBehaviour {
 		
 	}
 
-	public bool nextLevel(){
-		currentLevel++;
+	// pass -1 for normal progression
+	public bool nextLevel(int forceLevel){
+		if (forceLevel < 0) { 
+			currentLevel++;
+		}else{
+			currentLevel = forceLevel;
+		}
+
 		destroyCurrentLevel ();
 		return renderLevel (currentLevel);
 	}

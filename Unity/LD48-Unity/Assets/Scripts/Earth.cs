@@ -19,7 +19,7 @@ public class Earth : MonoBehaviour {
 
 	//private float tryToDecodeTime = Mathf.Infinity;
 
-	private float telemetryDelay = 2.5f;
+	private float telemetryDelay = 3.5f;
 
 	private bool willLoadNewLevel = false; // should enter rover, wont decode as message is old
 
@@ -28,6 +28,10 @@ public class Earth : MonoBehaviour {
 	private float solMark = Mathf.Infinity;
 
 	private bool displayingDecodedMessage;
+
+	public AudioSource roverNewMessageSound;
+
+	public int debugForceNextLevel = -1;
 
 	public SpriteRenderer missionUpdateIndicator;
 
@@ -71,6 +75,7 @@ public class Earth : MonoBehaviour {
 		}
 
 		missionUpdateIndicator.enabled = willLoadNewLevel;
+		roverNewMessageSound.volume = willLoadNewLevel ? 1 : 0;
 		// animate
 		Color c = missionUpdateIndicator.color;
 		c.a += Time.deltaTime * 1.2f;
@@ -103,7 +108,9 @@ public class Earth : MonoBehaviour {
 	}
 
 	private void beginDisplayingDecodedMessage(){
-		
+	
+	
+
 	}
 
 	public void continueAfterDecodedDisplay(){
@@ -127,7 +134,9 @@ public class Earth : MonoBehaviour {
 	public void playerIsInRover(){
 		if (willLoadNewLevel) { // test level progression by uncommenting this
 
-			bool notLastLevel = levelLoader.nextLevel ();
+			bool notLastLevel = levelLoader.nextLevel (debugForceNextLevel);
+			debugForceNextLevel=-1;
+
 			lastLevel = !notLastLevel;
 
 			Debug.Log("LAST LEVEL"+lastLevel);
