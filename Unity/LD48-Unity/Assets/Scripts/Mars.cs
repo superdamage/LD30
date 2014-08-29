@@ -59,8 +59,6 @@ public class Mars : MonoBehaviour {
 
 		SOL_IN_SECONDS = SOL_IN_HOURS * 60 * 60;
 
-
-
 		// time offset 
 		timeOffset = SOL_IN_SECONDS/4; // daybreak
 

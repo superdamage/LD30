@@ -18,6 +18,7 @@ public class LevelLoader : MonoBehaviour {
 
 	private List<RockPlaceholder> placeholders = new List<RockPlaceholder>();
 
+
 	private float U;
 	private float V;
 	private Vector3 linePosStart;
@@ -35,28 +36,38 @@ public class LevelLoader : MonoBehaviour {
 	private int lastLevelIndex = 0;
 
 	public Transform letterContainer;
+	//private Vector3 letterContainerInitialPos;
 	public Transform letterPrefab;
 
+	private bool _lettersHidden = true;
+
+	private List<Transform> decodedLines = new List<Transform>();
+
 	//decoded
+	/*
 	private int decoded_wordIndex = 0;
 	private int decoded_letterIndex = 0;
 	private int decoded_letterSize = 0;
 	private int decoded_totalChars = 0;
 	private float decoded_totalLetterX = 0;
+	*/
+	//private List<Transform> decoded_letters = new List<Transform> ();
 
 	public string currentQuestion = "";
 	private string currentAnswer = "";
 
 
 
+
 	void Start () {
 		morse = new Morse (morseTextAsset.text);
 		//nextLevel ();
-		
+		//letterContainerInitialPos = letterContainer.transform.position;
 	}
 
 	// pass -1 for normal progression
 	public bool nextLevel(int forceLevel){
+
 		if (forceLevel < 0) { 
 			currentLevel++;
 		}else{
@@ -82,13 +93,29 @@ public class LevelLoader : MonoBehaviour {
 		}
 
 		placeholders = new List<RockPlaceholder> ();
+
+		// clear decoded letters
+		/*
+		decoded_wordIndex = 0;
+		decoded_letterIndex = 0;
+		decoded_letterSize = 0;
+		decoded_totalChars = 0;
+		decoded_totalLetterX = 0;
+
+		foreach(Transform letterTransform in decoded_letters ){
+			Destroy(letterTransform.gameObject);
+		}
+
+		decoded_letters = new List<Transform> ();
+		letterContainer.transform.position = letterContainerInitialPos;
+		*/
 	}
 
-	bool renderLevel(int levelIndex){
+	bool renderLevel(int levelIndex){ // returns true if there are more levels
 
 		string jsonString = levelsAsset.text;
 		List<JSONObject> levelDatas = new JSONObject (jsonString).list;
-		lastLevelIndex = levelDatas.Count-1;
+		lastLevelIndex = levelDatas.Count;
 		if (levelIndex >= lastLevelIndex)return false; // no more levels
 
 		JSONObject levelData = levelDatas [levelIndex];
@@ -105,7 +132,9 @@ public class LevelLoader : MonoBehaviour {
 
 		string debugEncoedWords = "";
 
-		//if (decoded_answer.Length <= 0)return;
+		printDecodedAnswerLetters (a);
+
+		if (decoded_answer.Length <= 0)return true;
 
 		int[][] encoded_answer = morse.encode (decoded_answer);
 
@@ -137,7 +166,7 @@ public class LevelLoader : MonoBehaviour {
 		}
 		Debug.Log ("dec:"+decoded_answer+" enc:"+ debugEncoedWords);
 
-		addLastLetter ();
+		//addLastLetter ();
 
 
 		return true;
@@ -153,7 +182,6 @@ public class LevelLoader : MonoBehaviour {
 
 		sentenceSize.y = sentenceHeight;
 		sentenceSize.x = 0;
-
 		linePosStart.y = sentenceHeight / 2;
 		linePosStart.z = this.transform.position.z;
 	}
@@ -164,6 +192,8 @@ public class LevelLoader : MonoBehaviour {
 		U = 0;
 		V++;
 
+
+
 		Debug.Log("nl");
 
 		float lineWidth = gap.x * numCodes;
@@ -172,6 +202,8 @@ public class LevelLoader : MonoBehaviour {
 
 		linePosStart.x = (-lineWidth / 2) + gap.x/2;
 		linePosStart.y -= gap.y;
+
+		//setDecodedNewLine ();
 	}
 
 	void putPlaceholder(int code){
@@ -181,7 +213,7 @@ public class LevelLoader : MonoBehaviour {
 
 		bool isGap = code == morse.gap;
 
-		setDecodedNextLetter(isGap);
+		//setDecodedNextLetter(isGap);
 
 		if (isGap)return;
 
@@ -195,6 +227,8 @@ public class LevelLoader : MonoBehaviour {
 
 	}
 
+
+	/*
 	private void setDecodedNextLetter(bool ended){
 
 		decoded_letterSize++;
@@ -210,11 +244,17 @@ public class LevelLoader : MonoBehaviour {
 
 	private void setDecodedNewLine(){
 		decoded_wordIndex++;
-		decoded_letterIndex = 0;
+		//decoded_letterIndex = 0;
+		decoded_totalLetterX = 0;
 	}
 
 	private void addLastLetter(){
 		setDecodedNextLetter (true);
+
+		Vector3 pos = letterContainer.position;
+		pos.x = -sentenceSize.x / 2;
+		pos.y += (gap.y)/2;
+		letterContainer.position = pos;
 	}
 
 	private void putLetter(char l,int size){
@@ -228,19 +268,84 @@ public class LevelLoader : MonoBehaviour {
 
 		Vector3 letterPos = letterContainer.transform.position;
 
-		float letterSize = 1;
-		float letterWidth = decoded_letterSize*letterSize;
+		//float letterSize = 1;
+		float letterWidth = (decoded_letterSize-1)*gap.x;
 
 		Transform letterTransform = Instantiate (letterPrefab, letterPos, Quaternion.identity) as Transform;
 		letterTransform.parent = letterContainer;
 		TextMesh tm = letterTransform.GetComponent<TextMesh>() as TextMesh;
 		tm.text = ""+l;
-		letterPos.x = decoded_totalLetterX;
+		letterPos.x = decoded_totalLetterX + (letterWidth/2);
+		letterPos.y = - decoded_wordIndex * gap.y;
 		letterTransform.position = letterPos;
 
-		decoded_totalLetterX += letterWidth;
+		decoded_letters.Add (letterTransform);
+
+		decoded_totalLetterX += (letterWidth + gap.x);
 
 		decoded_totalChars++;
+	}
+
+	*/
+
+
+	private void printDecodedAnswerLetters(string decoded){
+
+		foreach(Transform lineTransform in decodedLines){
+			Destroy(lineTransform.gameObject);
+		}
+		decodedLines = new List<Transform> ();
+
+		string[] lines = decoded.Split (' ');
+
+		float yStart = (gap.y * lines.Length)/2 + (-1.394218f);
+
+		Vector3 letterPos = letterContainer.transform.position;
+		letterPos.y = yStart;
+
+		foreach (string line in lines) {
+
+			Debug.Log("loop");
+
+			//float xStart = ((line.Length + (line.Length - 1)) * gap.x) / 2;
+			//letterPos.x = xStart;
+
+			Transform letterTransform = Instantiate (letterPrefab, letterPos, Quaternion.identity) as Transform;
+			TextMesh tm = letterTransform.GetComponent<TextMesh>() as TextMesh;
+			decodedLines.Add(letterTransform);
+			// add gaps to letters
+			tm.text = "";
+			foreach(char c in line){
+
+				Debug.Log("loop2");
+
+				tm.text+=(c+" ");
+			}
+
+			letterTransform.parent = letterContainer;
+
+			letterPos.y -= gap.y;
+
+		}
+	}
+
+	public void setDecodedLettersHidden(bool hidden){
+		if (_lettersHidden == hidden)return;
+		_lettersHidden = hidden;
+
+		foreach(MeshRenderer mr in letterContainer.GetComponentsInChildren<MeshRenderer>()){
+			mr.enabled = !hidden;
+		}
+
+		float alpha = this.check()?0.5f:0.06f;
+
+
+		foreach(TextMesh tm in letterContainer.GetComponentsInChildren<TextMesh>()){
+			Color c = tm.color;
+			c.a = alpha;
+			tm.color = c;
+		}
+
 	}
 
 	public bool check(){

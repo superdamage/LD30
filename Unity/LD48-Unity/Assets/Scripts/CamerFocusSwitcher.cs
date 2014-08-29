@@ -41,8 +41,11 @@ public class CamerFocusSwitcher : MonoBehaviour {
 		float speed = 0;
 		float cameraSize = defaultCameraSize;
 
+		bool decodedHidden = true;
+
 		if (Input.GetKey("m") || overViewForced) {
 			positionTarget = levelLoader.transform.position;
+			decodedHidden = false;
 			speed = 1.0f;
 			cameraSize = levelFocusCameraSize();
 		}else if(playerIsInRover){
@@ -52,6 +55,8 @@ public class CamerFocusSwitcher : MonoBehaviour {
 			positionTarget = playerTransform.position;
 			speed = 0.2f;
 		}
+
+		levelLoader.setDecodedLettersHidden (decodedHidden);
 
 		// set nightosphere
 		Color c = nightosphere.material.color;

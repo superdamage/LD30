@@ -1,22 +1,23 @@
 ﻿<Properties>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/Earth.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/LevelLoader.cs">
     <Files>
-      <File FileName="Assets/Scripts/CamerFocusSwitcher.cs" Line="66" Column="65" />
+      <File FileName="Assets/Scripts/CamerFocusSwitcher.cs" Line="81" Column="3" />
       <File FileName="Assets/Scripts/SnapToTarget.cs" Line="1" Column="1" />
       <File FileName="Assets/Scripts/Rover.cs" Line="1" Column="1" />
       <File FileName="Assets/Scripts/Mars.cs" Line="1" Column="1" />
       <File FileName="Assets/Scripts/RockGenerator.cs" Line="1" Column="1" />
       <File FileName="Assets/Scripts/RoverInsideTrigger.cs" Line="1" Column="1" />
       <File FileName="Assets/Scripts/RoverScreen.cs" Line="1" Column="1" />
-      <File FileName="Assets/Scripts/LevelLoader.cs" Line="54" Column="30" />
+      <File FileName="Assets/Scripts/LevelLoader.cs" Line="290" Column="3" />
       <File FileName="Assets/Levels/levels.json" Line="1" Column="1" />
-      <File FileName="Assets/Scripts/Earth.cs" Line="63" Column="5" />
+      <File FileName="Assets/Scripts/Earth.cs" Line="1" Column="1" />
       <File FileName="Assets/Scripts/Morse.cs" Line="1" Column="1" />
       <File FileName="Assets/Scripts/RockPlaceholder.cs" Line="1" Column="1" />
       <File FileName="Assets/Scripts/RockDragger.cs" Line="1" Column="1" />
       <File FileName="Assets/Scripts/Rock.cs" Line="1" Column="1" />
-      <File FileName="Assets/Scripts/TopDownControls.cs" Line="13" Column="38" />
+      <File FileName="Assets/Scripts/TopDownControls.cs" Line="1" Column="1" />
+      <File FileName="Assets/Scripts/CutsSceneScaleFixer.cs" Line="1" Column="1" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>

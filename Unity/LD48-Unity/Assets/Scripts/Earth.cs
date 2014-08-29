@@ -39,6 +39,8 @@ public class Earth : MonoBehaviour {
 
 	public CamerFocusSwitcher focusSwitcher;
 
+	public bool testIgnoreRoverEnterance = false;
+
 	// Use this for initialization
 	void Start () {
 		Color c = missionUpdateIndicator.color;
@@ -52,6 +54,8 @@ public class Earth : MonoBehaviour {
 	}
 
 	void Update () {
+
+
 
 		float t = Time.time;
 
@@ -158,6 +162,7 @@ public class Earth : MonoBehaviour {
 	}
 
 	public void playerIsInRover(){
+
 		if (willLoadNewLevel) { // test level progression by uncommenting this
 
 			bool notLastLevel = levelLoader.nextLevel (debugForceNextLevel);
@@ -170,6 +175,9 @@ public class Earth : MonoBehaviour {
 			//decoding = true;
 			//Debug.Log("set true2");
 			willLoadNewLevel = false;
+
+			Debug.Log("in rover cmp");
+
 		}else{
 			Debug.Log("ELSE");
 		}
