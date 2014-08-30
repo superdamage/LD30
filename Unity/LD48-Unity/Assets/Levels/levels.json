@@ -16,7 +16,7 @@
 		"decoded":"READY"
 	},
 	{
-		"question":"OK, now carefully remove the control panels casing and look at the cables connecting its keyboard, than tell us colors of the cables from left to right.",
+		"question":"OK, now carefullyremove the control panels case and look at the cables connecting to its keyboard, than tell  us colors of the cables from   left to right.",
 		"decoded":"RED BLU GRN"
 	},
 	{
@@ -28,7 +28,7 @@
 		"decoded":"BETTER"
 	},
 	{
-		"question":"WOW it worked! We have attached 2 trajectory instructions to this message. First ones destination is you, second ones is Earth. Enter first one to lander now. When it lands, get in and enter the second one manually, than you are off to Earth!",
+		"question":"WOW it worked    We have attached 2 trajectory  instructions to this message.  First one's destination is you second one's is Earth. Enter   first one to lander now. When  it lands, get in and enter the second one manually, than you  are off to Earth",
 		"decoded":""
 	}
 ]

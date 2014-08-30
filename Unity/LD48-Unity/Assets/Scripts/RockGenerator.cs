@@ -48,8 +48,8 @@ public class RockGenerator : MonoBehaviour {
 
 
 	public Vector3 randomPositon(){
-		float halfW = worldBounds.width / 2 * 0.8f;
-		float halfH = worldBounds.height / 2 * 0.6f;
+		float halfW = worldBounds.width / 2 * 0.7f;
+		float halfH = worldBounds.height / 2 * 0.5f;
 		float rX = Random.Range (-halfW, halfW);
 		float rY = Random.Range (-halfH, halfH);
 		
