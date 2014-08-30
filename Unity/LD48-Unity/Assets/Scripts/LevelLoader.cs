@@ -373,7 +373,7 @@ public class LevelLoader : MonoBehaviour {
 
 	void Update () {
 
-		if (Input.GetKeyDown ("c")) {
+		if (Input.GetKeyDown (KeyCode.C) && Input.GetKeyDown (KeyCode.LeftShift)) {
 			cheat();
 		}
 
