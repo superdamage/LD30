@@ -147,7 +147,7 @@ public class Mars : MonoBehaviour {
 		hoursUntilNextSol = SOL_IN_HOURS * percentTimeLeftForNextSol;
 		currentSol = (int)Mathf.Ceil(secondsSpent / SOL_IN_SECONDS);
 
-		solCounterText.text = "SOL "+currentSol+"\n"+roverScreen.lifeSupport+"LEFT";
+		solCounterText.text = "SOL "+currentSol+"\n"+roverScreen.lifeSupport+" LEFT";
 
 
 		darkness = Mathf.Abs(((1 - percentTimeLeftForNextSol) - 0.5f) / 0.5f);

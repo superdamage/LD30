@@ -11,6 +11,8 @@ public class RockGenerator : MonoBehaviour {
 
 	public List<Rock> rocks;
 
+	public Transform rockShatterAnimationPrefab;
+
 	
 	// Use this for initialization
 	void Start () {
@@ -48,7 +50,7 @@ public class RockGenerator : MonoBehaviour {
 
 
 	public Vector3 randomPositon(){
-		float halfW = worldBounds.width / 2 * 0.7f;
+		float halfW = worldBounds.width / 2 * 0.5f;
 		float halfH = worldBounds.height / 2 * 0.5f;
 		float rX = Random.Range (-halfW, halfW);
 		float rY = Random.Range (-halfH, halfH);
@@ -58,6 +60,8 @@ public class RockGenerator : MonoBehaviour {
 	}
 
 	public void replace(Rock rock){
+
+		Instantiate (rockShatterAnimationPrefab, rock.transform.position, Quaternion.identity);
 
 		Destroy (rock.gameObject);
 		numRocks++;
