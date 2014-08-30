@@ -39,6 +39,8 @@ public class Mars : MonoBehaviour {
 	public float darkness = 0;
 	public bool isEarthVisible = false;
 
+	public RoverScreen roverScreen;
+
 	public GUIText solCounterText;
 
 	public Rover rover;
@@ -48,7 +50,7 @@ public class Mars : MonoBehaviour {
 	private float timeSceneEntered = 0;
 
 	private float lastTimeSolCounterDisplayed = 0;
-	private float solCounterDuration = 2.5f;
+	private float solCounterDuration = 3.0f;
 
 	public Earth earth;
 
@@ -60,7 +62,8 @@ public class Mars : MonoBehaviour {
 		SOL_IN_SECONDS = SOL_IN_HOURS * 60 * 60;
 
 		// time offset 
-		timeOffset = SOL_IN_SECONDS/4; // daybreak
+		//timeOffset = SOL_IN_SECONDS/4; // daybreak
+		timeOffset = 0.0f;
 
 		worldBunds = new Rect();
 
@@ -144,7 +147,7 @@ public class Mars : MonoBehaviour {
 		hoursUntilNextSol = SOL_IN_HOURS * percentTimeLeftForNextSol;
 		currentSol = (int)Mathf.Ceil(secondsSpent / SOL_IN_SECONDS);
 
-		solCounterText.text = "SOL "+currentSol;
+		solCounterText.text = "SOL "+currentSol+"\n"+roverScreen.lifeSupport+"LEFT";
 
 
 		darkness = Mathf.Abs(((1 - percentTimeLeftForNextSol) - 0.5f) / 0.5f);

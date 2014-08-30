@@ -11,7 +11,7 @@ public class RoverScreen : MonoBehaviour {
 	private float maxCharsPerLine = 31;
 
 	public int startingLifeSupport = 10;
-	private int lifeSupport;
+	public int lifeSupport;
 
 	private int numLineCapacity = 12;
 
@@ -91,6 +91,10 @@ public class RoverScreen : MonoBehaviour {
 		// satelite imagery coverage
 		linedText += "\nSATELITE IMAGERY COVERAGE:  "+ (mars.isEarthVisible?"YES":" NO");
 		visibilityIndicator.enabled = !mars.isEarthVisible;
+
+		string formattedDarkess = ""+ Mathf.Round((1-(mars.darkness)+0.5f)*100);
+		if (formattedDarkess.Length < 2)d1 = "0" + formattedDarkess;
+		visibilityIndicator.text = "VISIBILITY TO EARTH IS TOO LOW ("+formattedDarkess+"%) WAIT FOR SOL";
 
 		return linedText;
 	}

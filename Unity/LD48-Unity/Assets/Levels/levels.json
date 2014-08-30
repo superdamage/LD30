@@ -1,6 +1,6 @@
 [
 	{
-		"question":"Connection seems to be broken. We can send messages to you, but you won't be able to reply. You have to answerus by arranging rocks in morse code. Good luck! Write as shortand fast as you can as you havelimited life support.",
+		"question":"Connection seems to be broken. We can send messages to you, but you won't be able to reply. You have to answerus by arranging rocks in morse code. Good luck! Write as shortand fast as you can. You are   short on life support.",
 		"decoded":"OK"
 	},
 	{
@@ -24,7 +24,7 @@
 		"decoded":"OK SLOW"
 	},
 	{
-		"question":"We were expecting the latency. We think you may be able to modify the telemetry software so it can establish a faster connection to lander. Open TELEMETRY_CONFIG file and add this line at the end of it USE_COMPRESSION = TRUE.",
+		"question":"We were expectingthe latency. You may be able tomodify the telemetry software  so it can establish a faster connection to lander. Open TELEMETRY_CONFIG file and add this   line at the end of it:         USE_COMPRESSION = TRUE",
 		"decoded":"BETTER"
 	},
 	{
