@@ -94,7 +94,7 @@ public class RoverScreen : MonoBehaviour {
 
 		string formattedDarkess = ""+ Mathf.Round((1-(mars.darkness)+0.5f)*100);
 		if (formattedDarkess.Length < 2)d1 = "0" + formattedDarkess;
-		visibilityIndicator.text = "VISIBILITY TO EARTH IS TOO LOW ("+formattedDarkess+"%) WAIT FOR SOL";
+		visibilityIndicator.text = "VISIBILITY IS TOO LOW\n"+formattedDarkess+"%, WAIT FOR SOL";
 
 		return linedText;
 	}
