@@ -77,7 +77,9 @@ public class RoverScreen : MonoBehaviour {
 		linedText += "\n"; // gap
 
 		// print life support
-		linedText += "\nLIFE SUPPORT LEFT:       " +lifeSupport+" SOLS";
+		string stringLifeSupport = "" + lifeSupport;
+		if(stringLifeSupport.Length<2)stringLifeSupport = "0"+stringLifeSupport;
+		linedText += "\nLIFE SUPPORT LEFT:      " +stringLifeSupport+" SOLS";
 
 		// print life support
 		string d1 = ""+(int)mars.hoursUntilNextSol;

@@ -60,6 +60,7 @@
      <Compile Include="Assets\Scripts\LevelLoader.cs" />
      <Compile Include="Assets\Scripts\Mars.cs" />
      <Compile Include="Assets\Scripts\Morse.cs" />
+     <Compile Include="Assets\Scripts\NextSceneOnSpace.cs" />
      <Compile Include="Assets\Scripts\Rock.cs" />
      <Compile Include="Assets\Scripts\RockDragger.cs" />
      <Compile Include="Assets\Scripts\RockGenerator.cs" />

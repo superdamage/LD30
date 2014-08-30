@@ -1,10 +1,14 @@
 ﻿<Properties>
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="MonoDevelop.Default" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Rocket.cs">
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Levels/levels.json">
     <Files>
-      <File FileName="Assets/Scripts/Earth.cs" Line="144" Column="29" />
-      <File FileName="Assets/Scripts/LevelLoader.cs" Line="106" Column="40" />
-      <File FileName="Assets/Rocket.cs" Line="15" Column="2" />
+      <File FileName="Assets/Scripts/Earth.cs" Line="192" Column="56" />
+      <File FileName="Assets/Scripts/LevelLoader.cs" Line="100" Column="27" />
+      <File FileName="Assets/Scripts/InsideRocketTrigger.cs" Line="22" Column="6" />
+      <File FileName="Assets/Scripts/RoverInsideTrigger.cs" Line="26" Column="2" />
+      <File FileName="Assets/Scripts/Rover.cs" Line="34" Column="3" />
+      <File FileName="Assets/Scripts/Rocket.cs" Line="19" Column="33" />
+      <File FileName="Assets/Levels/levels.json" Line="15" Column="212" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>

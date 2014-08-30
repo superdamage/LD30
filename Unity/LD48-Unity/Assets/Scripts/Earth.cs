@@ -10,12 +10,15 @@ public class Earth : MonoBehaviour {
 	public SpriteRenderer couldNotDecode;
 	public SpriteRenderer couldDecode;
 	public SpriteRenderer newMessage;
+	public SpriteRenderer tutorial;
 
 	public RoverScreen roverScreen;
 
 	private float didDecodeMark = Mathf.Infinity;
 
 	private bool earthWillRespond = false;
+
+	public float maxMessageSoundVolume = 0.4f;
 
 	//private float tryToDecodeTime = Mathf.Infinity;
 
@@ -43,6 +46,8 @@ public class Earth : MonoBehaviour {
 
 	public Transform rocketPrefab;
 
+
+
 	public Rocket rocket;
 
 	// Use this for initialization
@@ -50,6 +55,9 @@ public class Earth : MonoBehaviour {
 		Color c = missionUpdateIndicator.color;
 		c.a = 0;
 		missionUpdateIndicator.color = c;
+
+		showCutscene (tutorial);
+		AudioListener.volume = 1;
 	}
 
 	public void newSol(){
@@ -59,9 +67,18 @@ public class Earth : MonoBehaviour {
 
 	void Update () {
 
-
-
 		float t = Time.time;
+
+		bool forceDismissCutscene = false;
+		if (Input.GetKeyDown (KeyCode.H) || Input.GetKeyDown (KeyCode.Escape) || Input.GetKeyDown (KeyCode.P)) {
+			if(tutorial.enabled == false){
+				showCutscene(tutorial);	
+			}else{
+				forceDismissCutscene = true;
+			}
+
+		}
+
 
 		if(displayingDecodedMessage){
 			if((timeMarkBeganDisplayingDecodedMessage+decodedMessageDisplayDuration)<t){
@@ -84,15 +101,17 @@ public class Earth : MonoBehaviour {
 			onNewMessage();
 		}
 
-		if (Input.GetKeyDown ("space")) {
+		if (Input.GetKeyDown (KeyCode.Space) || forceDismissCutscene) {
 			newMessage.enabled = false;
 			couldDecode.enabled = false;
 			newMessage.enabled = false;
+			tutorial.enabled = false;
 			Time.timeScale = 1.0f; // resume
+			AudioListener.volume = 1.0f;
 		}
 
 		missionUpdateIndicator.enabled = willLoadNewLevel;
-		roverNewMessageSound.volume = willLoadNewLevel ? 1 : 0;
+		roverNewMessageSound.volume = willLoadNewLevel ? maxMessageSoundVolume : 0;
 		// animate
 		Color c = missionUpdateIndicator.color;
 		c.a += Time.deltaTime * 1.2f;
@@ -160,8 +179,16 @@ public class Earth : MonoBehaviour {
 	}
 
 	void showCutscene(SpriteRenderer newMessage){
+
+		newMessage.enabled = false;
+		couldDecode.enabled = false;
+		newMessage.enabled = false;
+		tutorial.enabled = false;
+
+
 		newMessage.enabled = true;
 		Time.timeScale = 0.0f; // pause
+		AudioListener.volume = 0.0f;
 		roverScreen.setOn (false);
 	}
 

@@ -64,7 +64,7 @@ public class Rock : MonoBehaviour {
 			}
 
 			//t = Mathf.Max(hVelocity,vVelocity);
-			rigidbody2D.AddTorque(-t*10);
+			rigidbody2D.AddTorque(-t*13);
 
 		}else{
 			dragSFXSource.enabled = false;

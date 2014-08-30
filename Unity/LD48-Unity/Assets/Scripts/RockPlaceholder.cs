@@ -7,7 +7,8 @@ public class RockPlaceholder : MonoBehaviour {
 	public Sprite dotSprite;
 	public Sprite incorrectSprite;
 	public Sprite correctSprite;
-
+	
+	private AudioSource correctAudioSource;
 	private bool _isDash;
 
 	public Rock snappedRock;
@@ -25,6 +26,8 @@ public class RockPlaceholder : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		markTimeCreated = Time.time;
+
+		correctAudioSource = GetComponent<AudioSource> ();
 	}
 	
 	// Update is called once per frame
@@ -59,6 +62,7 @@ public class RockPlaceholder : MonoBehaviour {
 
 			if(r.Dark == _isDash){
 				snap(r);
+				correctAudioSource.Play();
 				setSprite(correctSprite);
 			}else if(snappedRock==null){
 				setSprite(incorrectSprite);

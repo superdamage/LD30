@@ -6,9 +6,15 @@ public class RoverInsideTrigger : MonoBehaviour {
 
 	public CamerFocusSwitcher focusSwitcher;
 	public RoverScreen roverScreen;
+	public AudioSource audioSource;
+	public float setOnPitch = 1.0f;
+	public float setOffPitch = 1.0f;
+
+
+
 	// Use this for initialization
 	void Start () {
-	
+		//audioSource = GetComponent<AudioSource> ();
 	}
 	
 	// Update is called once per frame
@@ -18,17 +24,30 @@ public class RoverInsideTrigger : MonoBehaviour {
 
 	void OnTriggerEnter2D(Collider2D o){
 		
-		if (o.tag == "Player") {
+		if (o.tag == "Player" && focusSwitcher.playerIsInRover == false) {
+
+			audioSource.Stop();
+			audioSource.pitch = setOnPitch;
+			audioSource.Play();
+
+
 			focusSwitcher.playerIsInRover = true;
 			roverScreen.setOn(true);
 		}
 	}
 	
 	void OnTriggerExit2D(Collider2D o){
-		
-		if (o.tag == "Player") {
+
+
+
+		if (o.tag == "Player" && focusSwitcher.playerIsInRover == true) {
 			focusSwitcher.playerIsInRover = false;
 			roverScreen.setOn(false);
+
+			audioSource.Stop();
+			audioSource.pitch = setOffPitch;
+			audioSource.Play();
+
 		}
 	}
 }

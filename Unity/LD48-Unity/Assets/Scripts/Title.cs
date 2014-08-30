@@ -23,7 +23,7 @@ public class Title : MonoBehaviour {
 
 	void onPlay(){
 
-		Application.LoadLevel (@"Game");
+		Application.LoadLevel (@"Story1");
 	}
 	
 	// Update is called once per frame
