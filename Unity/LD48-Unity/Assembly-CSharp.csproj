@@ -55,6 +55,7 @@
      <Compile Include="Assets\Scripts\Earth.cs" />
      <Compile Include="Assets\Scripts\EndGame.cs" />
      <Compile Include="Assets\Scripts\GUITextButton.cs" />
+     <Compile Include="Assets\Scripts\InsideRocketTrigger.cs" />
      <Compile Include="Assets\Scripts\Intro.cs" />
      <Compile Include="Assets\Scripts\LevelLoader.cs" />
      <Compile Include="Assets\Scripts\Mars.cs" />
@@ -63,12 +64,14 @@
      <Compile Include="Assets\Scripts\RockDragger.cs" />
      <Compile Include="Assets\Scripts\RockGenerator.cs" />
      <Compile Include="Assets\Scripts\RockPlaceholder.cs" />
+     <Compile Include="Assets\Scripts\Rocket.cs" />
      <Compile Include="Assets\Scripts\Rover.cs" />
      <Compile Include="Assets\Scripts\RoverInsideTrigger.cs" />
      <Compile Include="Assets\Scripts\RoverScreen.cs" />
      <Compile Include="Assets\Scripts\SnapToTarget.cs" />
      <Compile Include="Assets\Scripts\Title.cs" />
      <Compile Include="Assets\Scripts\TopDownControls.cs" />
+     <Compile Include="Assets\Scripts\VisibleOnTrigger.cs" />
      <Compile Include="Assets\iTween\Plugins\iTween.cs" />
      <Compile Include="Assets\iTween\Sample\MoveSample.cs" />
      <Compile Include="Assets\iTween\Sample\RotateSample.cs" />

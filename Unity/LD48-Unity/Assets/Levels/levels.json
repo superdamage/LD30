@@ -1,18 +1,18 @@
 [
 	{
-		"question":"Connection seems to be broken. We can send messages to you, but you won't be able to reply. You have to answer us by arranging rocks in morse code. Good luck! But be fast, write as short as you can. You have limited life support.",
+		"question":"Connection seems to be broken. We can send messages to you, but you won't be able to reply. You have to answerus by arranging rocks in morse code. Good luck! Write as shortand fast as you can as you havelimited life support.",
 		"decoded":"OK"
 	},
 	{
-		"question":"That looks good. We have redirected Europa lander to your site but you will have to operate it remotely. Can you try to access it?",
+		"question":"That looks good. We have redirected the Europa  lander to mars. But you will   have to operate it remotely andland it to your site. Can you  try to access it?",
 		"decoded":"DENY"
 	},
 	{
-		"question":"I forgot to mention the password. It's SPACEISAWESOME. When you get back earth, come punch me in the face for risking your life. Sorry about that.",
+		"question":"I forgot to tell you the password. It's SP4CE1SAWES0M3. When you get back earthcome punch me in the face for  risking your life. Sorry about that.",
 		"decoded":"ACCESS"
 	},
 	{
-		"question":"Great! Now you have to rewire rover's control panel to telemetry computer so you can remotely control the lander. We are thinking of a solution, update us when you prepare the tools.",
+		"question":"Great. Now you   should rewire rover's control  panel to telemetry computer    so you can remotely control thelander. We are planning of further instructions, update us    when you ready the tools.",
 		"decoded":"READY"
 	},
 	{

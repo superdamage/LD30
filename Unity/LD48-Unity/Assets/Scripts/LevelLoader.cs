@@ -115,8 +115,9 @@ public class LevelLoader : MonoBehaviour {
 
 		string jsonString = levelsAsset.text;
 		List<JSONObject> levelDatas = new JSONObject (jsonString).list;
-		lastLevelIndex = levelDatas.Count;
-		if (levelIndex >= lastLevelIndex)return false; // no more levels
+		lastLevelIndex = levelDatas.Count-1;
+
+
 
 		JSONObject levelData = levelDatas [levelIndex];
 		string q = levelData["question"].str;
@@ -134,6 +135,7 @@ public class LevelLoader : MonoBehaviour {
 
 		printDecodedAnswerLetters (a);
 
+		if (levelIndex >= lastLevelIndex)return false; // no more levels
 		if (decoded_answer.Length <= 0)return true;
 
 		int[][] encoded_answer = morse.encode (decoded_answer);

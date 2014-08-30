@@ -41,6 +41,10 @@ public class Earth : MonoBehaviour {
 
 	public bool testIgnoreRoverEnterance = false;
 
+	public Transform rocketPrefab;
+
+	public Rocket rocket;
+
 	// Use this for initialization
 	void Start () {
 		Color c = missionUpdateIndicator.color;
@@ -169,8 +173,8 @@ public class Earth : MonoBehaviour {
 			debugForceNextLevel=-1;
 
 			lastLevel = !notLastLevel;
-
-			Debug.Log("LAST LEVEL"+lastLevel);
+			Debug.Log("LL "+lastLevel);
+			if(lastLevel)beginLastLevel();
 
 			//decoding = true;
 			//Debug.Log("set true2");
@@ -182,5 +186,10 @@ public class Earth : MonoBehaviour {
 			Debug.Log("ELSE");
 		}
 
+	}
+
+	public void beginLastLevel(){
+		Transform rocketTransform = Instantiate (rocketPrefab) as Transform;
+		rocket = rocketTransform.GetComponent<Rocket>();
 	}
 }
