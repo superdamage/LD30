@@ -39,6 +39,9 @@ public class Mars : MonoBehaviour {
 	public float darkness = 0;
 	public bool isEarthVisible = false;
 
+	public bool timeFrozen = false;
+	private float timePastWhenFrozen = 0.0f;
+
 	public RoverScreen roverScreen;
 
 	public GUIText solCounterText;
@@ -137,11 +140,16 @@ public class Mars : MonoBehaviour {
 	void Update () {
 
 		// when game resets, time adds up so i had to subtract scene starting time
-		float relativeTime = Time.time - timeSceneEntered;
+		float relativeTime = Time.time - timeSceneEntered - timePastWhenFrozen;
 
 		int oldSol = currentSol;
 
-		secondsSpent = timeOffset + relativeTime * timeScale;
+		if (timeFrozen == false) {
+			secondsSpent = timeOffset + relativeTime * timeScale;
+		}else{
+			timePastWhenFrozen += Time.deltaTime;
+		}
+
 		percentTimeLeftForNextSol = 1 - (secondsSpent % SOL_IN_SECONDS) / SOL_IN_SECONDS;
 		secondsUntilNextSol = SOL_IN_SECONDS * percentTimeLeftForNextSol;
 		hoursUntilNextSol = SOL_IN_HOURS * percentTimeLeftForNextSol;

@@ -61,7 +61,6 @@ public class CamerFocusSwitcher : MonoBehaviour {
 		// set nightosphere
 		Color c = nightosphere.material.color;
 		c.a += (mars.darkness*0.85f - c.a)/5;
-		Debug.Log (c.a);
 		nightosphere.material.color = c;
 
 		positionTarget = clampBounds (positionTarget);
