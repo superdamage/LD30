@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.SceneManagement;
 
 public class Intro : MonoBehaviour {
 
@@ -9,17 +10,17 @@ public class Intro : MonoBehaviour {
 
 	void Start () {
 		introDuration = dur;
-		logo.renderer.enabled = false;
+		logo.GetComponent<Renderer>().enabled = false;
 	}
 	
 	void Update () {
 		introDuration -= Time.deltaTime;
 		if (introDuration <= (dur-0.1)) {
-			logo.renderer.enabled = true;
+			logo.GetComponent<Renderer>().enabled = true;
 		}
 
 		if (introDuration <= 0) {
-			Application.LoadLevel(@"Title");
+			SceneManager.LoadScene ("Title");
 		}
 	}
 }

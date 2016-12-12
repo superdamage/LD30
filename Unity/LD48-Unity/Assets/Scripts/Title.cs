@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.SceneManagement;
 
 public class Title : MonoBehaviour {
 
@@ -23,7 +24,7 @@ public class Title : MonoBehaviour {
 
 	void onPlay(){
 
-		Application.LoadLevel (@"Story1");
+		SceneManager.LoadScene ("Story1");
 	}
 	
 	// Update is called once per frame

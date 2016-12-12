@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.SceneManagement;
 
 public class EndGame : MonoBehaviour {
 
@@ -24,6 +25,7 @@ public class EndGame : MonoBehaviour {
 
 	void dismiss(){
 		
-		Application.LoadLevel (0);
+		SceneManager.LoadScene (0);
+	
 	}
 }

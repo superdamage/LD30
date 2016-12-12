@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.SceneManagement;
 
 public class RoverScreen : MonoBehaviour {
 
@@ -108,7 +109,8 @@ public class RoverScreen : MonoBehaviour {
 		//Debug.Log ("cs "+mars.currentSol);
 		lifeSupport = startingLifeSupport - mars.currentSol;
 		if (lifeSupport <= -1) { // dies when next hungry not when it diminishes
-			Application.LoadLevel("Death");
+			
+			SceneManager.LoadScene ("Death");
 		}
 	}
 

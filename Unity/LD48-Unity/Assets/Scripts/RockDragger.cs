@@ -72,7 +72,7 @@ public class RockDragger : MonoBehaviour {
 
 		DistanceJoint2D dst = pullCandidate.GetComponent<DistanceJoint2D>();
 		
-		dst.connectedBody = this.rigidbody2D;
+		dst.connectedBody = this.GetComponent<Rigidbody2D>();
 		activeJoint = dst;
 		dst.enabled = true;
 		
@@ -86,7 +86,7 @@ public class RockDragger : MonoBehaviour {
 		activeJoint.connectedBody = null;
 		activeJoint = null;
 
-		rigidbody2D.velocity = Vector2.zero;
+		GetComponent<Rigidbody2D>().velocity = Vector2.zero;
 
 	}
 

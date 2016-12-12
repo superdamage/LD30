@@ -82,7 +82,7 @@ public class CamerFocusSwitcher : MonoBehaviour {
 
 	Vector3 clampBounds(Vector3 targetPos){
 	
-		float vertExtent = Camera.main.camera.orthographicSize;  
+		float vertExtent = Camera.main.GetComponent<Camera>().orthographicSize;  
 		float horzExtent = vertExtent * Screen.width / Screen.height;
 		
 		rightBound = mars.worldBunds.width/2 - horzExtent;
@@ -100,7 +100,7 @@ public class CamerFocusSwitcher : MonoBehaviour {
 
 	float levelFocusCameraSize(){
 
-		float vertExtent = Camera.main.camera.orthographicSize;  
+		float vertExtent = Camera.main.GetComponent<Camera>().orthographicSize;  
 		float horzExtent = vertExtent * Screen.width / Screen.height;
 		float p = levelLoader.sentenceSize.x/horzExtent;
 		p = Mathf.Max (p,0.9f);

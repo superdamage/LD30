@@ -28,13 +28,13 @@ public class SnapToTarget : MonoBehaviour {
 			pos.y = target.position.y;
 			transform.position = pos;
 
-			renderer.enabled = true;
+			GetComponent<Renderer>().enabled = true;
 
-			((SpriteRenderer)renderer).sprite = isDash?dashTarget:dotTarget;
+			((SpriteRenderer)GetComponent<Renderer>()).sprite = isDash?dashTarget:dotTarget;
 
 		}else{
 
-			renderer.enabled = false;
+			GetComponent<Renderer>().enabled = false;
 			//enabled = false;
 		}
 	}

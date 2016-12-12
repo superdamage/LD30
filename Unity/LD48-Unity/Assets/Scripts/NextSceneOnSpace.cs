@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.SceneManagement;
 
 public class NextSceneOnSpace : MonoBehaviour {
 
@@ -25,6 +26,6 @@ public class NextSceneOnSpace : MonoBehaviour {
 	
 	void dismiss(){
 		
-		Application.LoadLevel (nextScene);
+		SceneManager.LoadScene (nextScene);
 	}
 }

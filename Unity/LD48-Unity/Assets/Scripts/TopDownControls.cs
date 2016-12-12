@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.SceneManagement;
 
 public class TopDownControls : MonoBehaviour{
 	// Normal Movements Variables
@@ -39,7 +40,7 @@ public class TopDownControls : MonoBehaviour{
 		maxSpeed = curSpeed;
 		
 		// Move senteces
-		rigidbody2D.velocity = new Vector2(Mathf.Lerp(0, Input.GetAxis("Horizontal")* curSpeed, 0.8f),
+		GetComponent<Rigidbody2D>().velocity = new Vector2(Mathf.Lerp(0, Input.GetAxis("Horizontal")* curSpeed, 0.8f),
 		                                   Mathf.Lerp(0, Input.GetAxis("Vertical")* curSpeed, 0.8f));
 
 		bool dragging = false;
@@ -51,8 +52,8 @@ public class TopDownControls : MonoBehaviour{
 			footStepsSFX.pitch = 1.9f;
 		}
 
-		float velocityX = rigidbody2D.velocity.x;
-		float velocityY = rigidbody2D.velocity.y;
+		float velocityX = GetComponent<Rigidbody2D>().velocity.x;
+		float velocityY = GetComponent<Rigidbody2D>().velocity.y;
 
 		if (Mathf.Abs (velocityX) >= sfxMinVelocity ||
 		    Mathf.Abs (velocityY) >= sfxMinVelocity) {

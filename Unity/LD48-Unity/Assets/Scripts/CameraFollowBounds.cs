@@ -43,7 +43,7 @@ public class CameraFollowBounds : MonoBehaviour {
 	// Update is called once per frame
 	void Update () 
 	{
-		float vertExtent = Camera.main.camera.orthographicSize;  
+		float vertExtent = Camera.main.GetComponent<Camera>().orthographicSize;  
 		float horzExtent = vertExtent * Screen.width / Screen.height;
 
 		rightBound = mars.worldBunds.width/2 - horzExtent;

@@ -51,8 +51,8 @@ public class Rock : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 
-		float hVelocity = rigidbody2D.velocity.x;
-		float vVelocity = rigidbody2D.velocity.y;
+		float hVelocity = GetComponent<Rigidbody2D>().velocity.x;
+		float vVelocity = GetComponent<Rigidbody2D>().velocity.y;
 
 		if (Mathf.Abs (hVelocity) >= sfxMinVelocity ||
 		    Mathf.Abs (vVelocity) >= sfxMinVelocity) {
@@ -64,7 +64,7 @@ public class Rock : MonoBehaviour {
 			}
 
 			//t = Mathf.Max(hVelocity,vVelocity);
-			rigidbody2D.AddTorque(-t*13);
+			GetComponent<Rigidbody2D>().AddTorque(-t*13);
 
 		}else{
 			dragSFXSource.enabled = false;
@@ -116,7 +116,7 @@ public class Rock : MonoBehaviour {
 
 	public void relocate(){
 
-		this.transform.rigidbody2D.velocity = Vector2.zero;
+		this.transform.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
 
 		DistanceJoint2D dst = transform.GetComponent<DistanceJoint2D>();
 		if (dst.connectedBody!=null) {

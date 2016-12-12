@@ -16,3 +16,5 @@ Temp/
 Obj/
 UnityGenerated/
 Library/
+
+.DS_Store

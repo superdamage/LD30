@@ -21,12 +21,12 @@ public class GUITextButton : MonoBehaviour {
 	void OnMouseEnter(){
 		if (higlightSFX)higlightSFX.Play();
 
-		this.guiText.color = highlightedColor;
+		this.GetComponent<GUIText>().color = highlightedColor;
 	}
 
 	void OnMouseExit(){
 
-		this.guiText.color = normalColor;
+		this.GetComponent<GUIText>().color = normalColor;
 	}
 
 }

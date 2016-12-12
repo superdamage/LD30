@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.SceneManagement;
 
 public class Rocket : MonoBehaviour {
 
@@ -16,6 +17,7 @@ public class Rocket : MonoBehaviour {
 	}
 
 	public void playerJustGitInRocket(){
-		Application.LoadLevel ("Win");
+
+		SceneManager.LoadScene ("Win");
 	}
 }
